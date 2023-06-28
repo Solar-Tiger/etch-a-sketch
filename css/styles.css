@@ -22,7 +22,7 @@ body {
   border: 2px solid black;
 }
 
-div {
+.etch-a-sketch-square {
   width: 100px;
   height: 100px;
   border: 2px solid black;
