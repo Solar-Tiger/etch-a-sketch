@@ -27,7 +27,3 @@ body {
   height: 100px;
   border: 2px solid black;
 }
-
-.etch-a-sketch-square:hover {
-  background-color: darkgreen;
-}

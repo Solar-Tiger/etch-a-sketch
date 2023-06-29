@@ -6,3 +6,13 @@ for (let i = 0; i < 16; i++) {
 
   gridContainer.appendChild(gridDiv);
 }
+
+const etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
+
+console.log(etchASketchSquare);
+
+etchASketchSquare.forEach((square) => {
+  square.addEventListener('mouseenter', (e) => {
+    e.target.style.backgroundColor = 'green';
+  });
+});
