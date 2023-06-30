@@ -6,8 +6,8 @@ let gridSizeChoice = 16;
 for (let i = 0; i < gridSizeChoice * gridSizeChoice; i++) {
   const gridDiv = document.createElement('div');
   gridDiv.classList.add('etch-a-sketch-square');
-  gridDiv.style.width = `${800 / gridSizeChoice}px`;
-  gridDiv.style.height = `${800 / gridSizeChoice}px`;
+  gridDiv.style.width = `${960 / gridSizeChoice}px`;
+  gridDiv.style.height = `${960 / gridSizeChoice}px`;
 
   gridContainer.appendChild(gridDiv);
 }
