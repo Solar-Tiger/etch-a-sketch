@@ -11,6 +11,18 @@ body {
   height: 100vh;
 }
 
+.etch-a-sketch-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+.change-grid-size {
+  padding: 10px 20px;
+  font-size: 32px;
+}
+
 .grid-container {
   display: flex;
   flex-wrap: wrap;
