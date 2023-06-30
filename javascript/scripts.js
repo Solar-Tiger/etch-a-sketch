@@ -1,9 +1,11 @@
 /* eslint-disable prefer-const */
 const gridContainer = document.querySelector('.grid-container');
 
-for (let i = 0; i < 16; i++) {
+for (let i = 0; i < 4; i++) {
   const gridDiv = document.createElement('div');
   gridDiv.classList.add('etch-a-sketch-square');
+  gridDiv.style.width = `${2 * 100}px`;
+  gridDiv.style.height = `${2 * 100}px`;
 
   gridContainer.appendChild(gridDiv);
 }
