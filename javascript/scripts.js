@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 const gridContainer = document.querySelector('.grid-container');
 
 for (let i = 0; i < 16; i++) {
@@ -9,10 +10,14 @@ for (let i = 0; i < 16; i++) {
 
 const etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
 
-console.log(etchASketchSquare);
-
 etchASketchSquare.forEach((square) => {
+  let opacity = 0.1;
+
   square.addEventListener('mouseenter', (e) => {
-    e.target.style.backgroundColor = 'green';
+    e.target.style.backgroundColor = `rgba(${255}, ${99}, ${71}, ${opacity})`;
+
+    if (opacity < 1) {
+      opacity += 0.1;
+    }
   });
 });
