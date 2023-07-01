@@ -30,8 +30,8 @@ function createNewGrid() {
   for (let i = 0; i < gridSize * gridSize; i++) {
     const gridDiv = document.createElement('div');
     gridDiv.classList.add('etch-a-sketch-square');
-    gridDiv.style.width = `${960 / gridSize}px`;
-    gridDiv.style.height = `${960 / gridSize}px`;
+    gridDiv.style.width = `${gridContainer.clientWidth / gridSize}px`;
+    gridDiv.style.height = `${gridContainer.clientHeight / gridSize}px`;
     gridContainer.appendChild(gridDiv);
   }
 }
@@ -40,8 +40,8 @@ function createUserNewGrid(userGridInput) {
   for (let i = 0; i < userGridInput * userGridInput; i++) {
     const gridDiv = document.createElement('div');
     gridDiv.classList.add('etch-a-sketch-square');
-    gridDiv.style.width = `${960 / userGridInput}px`;
-    gridDiv.style.height = `${960 / userGridInput}px`;
+    gridDiv.style.width = `${gridContainer.clientWidth / userGridInput}px`;
+    gridDiv.style.height = `${gridContainer.clientHeight / userGridInput}px`;
     gridContainer.appendChild(gridDiv);
   }
 }
