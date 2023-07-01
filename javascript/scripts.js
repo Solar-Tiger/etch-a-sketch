@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-const gridContainer = document.querySelector('.grid-container');
+const gridContainer = document.querySelector('.grid-square-container');
 const changeGridSizeBtn = document.querySelector('.change-grid-size-btn');
 let userGridSizeChoice;
 
@@ -30,8 +30,11 @@ function createNewGrid() {
   for (let i = 0; i < gridSize * gridSize; i++) {
     const gridDiv = document.createElement('div');
     gridDiv.classList.add('etch-a-sketch-square');
-    gridDiv.style.width = `${960 / gridSize}px`;
-    gridDiv.style.height = `${960 / gridSize}px`;
+    // gridDiv.style.flexBasis = `${960 / gridSize}px`;
+    // gridDiv.style.flexShrink = '1';
+    gridDiv.style.aspectRatio = '1/1';
+    gridDiv.style.flex = `0 1 ${960 / gridSize}px`;
+    // gridDiv.style.height = `${960 / gridSize}px`;
     gridContainer.appendChild(gridDiv);
   }
 }

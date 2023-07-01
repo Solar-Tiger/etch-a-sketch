@@ -1,29 +1,14 @@
 * {
-  /* box-sizing: border-box; */
   margin: 0;
   padding: 0;
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.etch-a-sketch-container {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  align-items: center;
-}
-
-.change-grid-size {
-  padding: 10px 20px;
+.change-grid-size-btn {
+  padding: 20px 40px;
   font-size: 32px;
 }
 
-.grid-container {
+.grid-square-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -36,7 +21,5 @@ body {
 
 .etch-a-sketch-square {
   box-sizing: border-box;
-  /* width: 100px;
-  height: 100px; */
   border: 1px solid black;
 }
