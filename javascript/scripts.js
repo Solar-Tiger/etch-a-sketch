@@ -48,9 +48,24 @@ function createUserNewGrid(userGridInput) {
 
 function fillEtchASketchSquare() {
   etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
+
   etchASketchSquare.forEach((square) => {
     let opacity = 0.1;
     square.addEventListener('mouseenter', (e) => {
+      e.target.style.backgroundColor = `rgba(${255}, ${99}, ${71}, ${opacity})`;
+      if (opacity < 1) {
+        opacity += 0.1;
+      }
+    });
+  });
+}
+
+function fillEtchASketchSquareTouch() {
+  etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
+
+  etchASketchSquare.forEach((square) => {
+    let opacity = 0.1;
+    square.addEventListener('touchmove', (e) => {
       e.target.style.backgroundColor = `rgba(${255}, ${99}, ${71}, ${opacity})`;
       if (opacity < 1) {
         opacity += 0.1;
