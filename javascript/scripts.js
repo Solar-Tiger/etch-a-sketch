@@ -25,6 +25,40 @@ changeGridSizeBtn.addEventListener('click', () => {
   }
 });
 
+gridContainer.addEventListener('touchstart', (e) => {
+  e.preventDefault();
+
+  changeBackgronudColor(e.target);
+});
+
+let previousSquare = null;
+
+etchASketchSquare.forEach((square) => {
+  square.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+
+    const elem = document.elementFromPoint(
+      e.touches[0].clientX,
+      e.touches[0].clientY
+    );
+
+    if (elem && e.target.classList.contains('etch-a-sketch-square')) {
+      const currentSquare = elem;
+
+      if (currentSquare !== previousSquare) {
+        changeBackgronudColor(currentSquare);
+        previousSquare = currentSquare;
+      }
+    }
+  });
+});
+
+gridContainer.addEventListener('touchend', (e) => {
+  e.preventDefault();
+
+  previousSquare = null;
+});
+
 function createNewGrid() {
   let gridSize = 4;
   for (let i = 0; i < gridSize * gridSize; i++) {
@@ -47,8 +81,6 @@ function createUserNewGrid(userGridInput) {
 }
 
 function fillEtchASketchSquare() {
-  etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
-
   etchASketchSquare.forEach((square) => {
     let opacity = 0.1;
     square.addEventListener('mouseenter', (e) => {
@@ -60,16 +92,19 @@ function fillEtchASketchSquare() {
   });
 }
 
-function fillEtchASketchSquareTouch() {
-  etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
+function changeBackgronudColor(color) {
+  let randomColor = color;
 
-  etchASketchSquare.forEach((square) => {
-    let opacity = 0.1;
-    square.addEventListener('touchmove', (e) => {
-      e.target.style.backgroundColor = `rgba(${255}, ${99}, ${71}, ${opacity})`;
-      if (opacity < 1) {
-        opacity += 0.1;
-      }
-    });
-  });
+  randomColor.style.backgroundColor = getRandomColor();
+}
+
+function getRandomColor() {
+  let letters = '0123456789ABCDEF';
+  let color = '#';
+
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+
+  return color;
 }
