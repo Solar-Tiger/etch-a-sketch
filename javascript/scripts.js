@@ -21,6 +21,9 @@ changeGridSizeBtn.addEventListener('click', () => {
       gridContainer.removeChild(gridContainer.lastElementChild);
     }
     createUserNewGrid(userGridSizeChoice);
+
+    etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
+
     fillEtchASketchSquare();
     fillEtchASketchSquareTouch();
   } else {
@@ -54,13 +57,17 @@ function fillEtchASketchSquare() {
   etchASketchSquare.forEach((square) => {
     let opacity = 0.1;
     square.addEventListener('mouseenter', (e) => {
-      changeBackgronudColor(e.target);
+      e.target.style.backgroundColor = `rgb(${getRandomNumber()},${getRandomNumber()},${getRandomNumber()},${opacity})`;
       if (opacity < 1) {
         opacity += 0.1;
       }
     });
   });
 }
+
+// let opacity = 0.1;
+
+// changeGridSizeBtn.style.color = `rgb(${145},${85},${112},${opacity})`;
 
 function fillEtchASketchSquareTouch() {
   etchASketchSquare.forEach((square) => {
@@ -70,36 +77,28 @@ function fillEtchASketchSquareTouch() {
   });
 }
 
-function touchStart() {
-  gridContainer.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-
-    changeBackgronudColor(e.target);
-  });
+function touchStart(e) {
+  changeBackgronudColor(e.target);
 }
 
 let previousSquare = null;
 
-function touchMove() {
-  etchASketchSquare.forEach((square) => {
-    square.addEventListener('touchmove', (e) => {
-      e.preventDefault();
+function touchMove(e) {
+  e.preventDefault();
 
-      const elem = document.elementFromPoint(
-        e.touches[0].clientX,
-        e.touches[0].clientY
-      );
+  const elem = document.elementFromPoint(
+    e.touches[0].clientX,
+    e.touches[0].clientY
+  );
 
-      if (elem && e.target.classList.contains('etch-a-sketch-square')) {
-        const currentSquare = elem;
+  if (elem && e.target.classList.contains('etch-a-sketch-square')) {
+    const currentSquare = elem;
 
-        if (currentSquare !== previousSquare) {
-          changeBackgronudColor(currentSquare);
-          previousSquare = currentSquare;
-        }
-      }
-    });
-  });
+    if (currentSquare !== previousSquare) {
+      changeBackgronudColor(currentSquare);
+      previousSquare = currentSquare;
+    }
+  }
 }
 
 function touchEnd() {
@@ -125,4 +124,10 @@ function getRandomColor() {
   }
 
   return color;
+}
+
+function getRandomNumber() {
+  let randomNumber = Math.floor(Math.random() * 256);
+
+  return randomNumber;
 }
