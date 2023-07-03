@@ -89,11 +89,15 @@ function touchMove(e) {
     e.touches[0].clientY
   );
 
-  if (touchedSquare && e.target.classList.contains('etch-a-sketch-square')) {
+  if (
+    touchedSquare &&
+    touchedSquare.classList.contains('etch-a-sketch-square')
+  ) {
     const currentSquare = touchedSquare;
 
     if (currentSquare !== previousSquare) {
-      changeBackgronudColor(currentSquare);
+      currentSquare.style.backgroundColor = `rgba(${getRandomNumber()},${getRandomNumber()},${getRandomNumber()})`;
+
       previousSquare = currentSquare;
     }
   }
