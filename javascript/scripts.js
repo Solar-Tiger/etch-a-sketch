@@ -76,7 +76,7 @@ function fillEtchASketchSquareTouch() {
 }
 
 function touchStart(e) {
-  changeBackgronudColor(e.target);
+  e.target.style.backgroundColor = `rgba(${getRandomNumber()},${getRandomNumber()},${getRandomNumber()})`;
 }
 
 let previousSquare = null;
@@ -107,37 +107,20 @@ function touchEnd() {
   });
 }
 
-function changeBackgronudColor(color) {
-  let randomColor = color;
-
-  randomColor.style.backgroundColor = getRandomColor();
-}
-
-function getRandomColor() {
-  let letters = '0123456789ABCDEF';
-  let color = '#';
-
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-
-  return color;
-}
-
 function getRandomNumber() {
   let randomNumber = Math.floor(Math.random() * 256);
 
   return randomNumber;
 }
 
-const mediaQuery = window.matchMedia('(min-width: 768px');
+// const mediaQuery = window.matchMedia('(min-width: 768px');
 
-function handleTabletChange(e) {
-  if (e.matches) {
-    console.log('It matched, sir');
-  }
-}
+// function handleTabletChange(e) {
+//   if (e.matches) {
+//     console.log('It matched, sir');
+//   }
+// }
 
-mediaQuery.addEventListener('change', handleTabletChange);
+// mediaQuery.addEventListener('change', handleTabletChange);
 
-handleTabletChange(mediaQuery);
+// handleTabletChange(mediaQuery);
