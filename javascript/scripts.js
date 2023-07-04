@@ -118,8 +118,33 @@ function getRandomNumber() {
   return randomNumber;
 }
 
-const mediaQuery = window.matchMedia('min-width: 459px');
-const mediaQueryTwo = window.matchMedia('min-width: 460px');
+function autoChangeGridSize() {
+  let windowWidth = window.screen.width;
+
+  if (windowWidth > 360 && windowWidth < 767) {
+    const gridDiv = document.querySelectorAll('.etch-a-sketch-square');
+
+    gridContainer.style.width = '300px';
+    gridContainer.style.height = '300px';
+
+    gridDiv.forEach((div) => {
+      div.style.width = `${gridContainer.clientWidth / gridSize}px`;
+      div.style.height = `${gridContainer.clientHeight / gridSize}px`;
+    });
+  }
+}
+
+const mediaQuery = window.matchMedia(
+  '(min-width: 300px) and (max-width: 767px)'
+);
+
+const mediaQueryTwo = window.matchMedia(
+  '(min-width: 768px) and (max-width: 1279px)'
+);
+
+const mediaQueryThree = window.matchMedia(
+  '(min-width: 1280px) and (max-width: 1920px)'
+);
 
 function handleTabletChange(e) {
   if (e.matches) {
@@ -139,10 +164,22 @@ function handleTabletChangeTwo(e) {
   if (e.matches) {
     const gridDiv = document.querySelectorAll('.etch-a-sketch-square');
 
-    gridContainer.style.width = '460px';
-    gridContainer.style.height = '460px';
+    gridContainer.style.width = '650px';
+    gridContainer.style.height = '650px';
 
-    console.log('Hi');
+    gridDiv.forEach((div) => {
+      div.style.width = `${gridContainer.clientWidth / gridSize}px`;
+      div.style.height = `${gridContainer.clientHeight / gridSize}px`;
+    });
+  }
+}
+
+function handleTabletChangeThree(e) {
+  if (e.matches) {
+    const gridDiv = document.querySelectorAll('.etch-a-sketch-square');
+
+    gridContainer.style.width = '1150px';
+    gridContainer.style.height = '1150px';
 
     gridDiv.forEach((div) => {
       div.style.width = `${gridContainer.clientWidth / gridSize}px`;
@@ -153,7 +190,4 @@ function handleTabletChangeTwo(e) {
 
 mediaQuery.addEventListener('change', handleTabletChange);
 mediaQueryTwo.addEventListener('change', handleTabletChangeTwo);
-
-handleTabletChange(mediaQuery);
-
-handleTabletChangeTwo(mediaQueryTwo);
+mediaQueryThree.addEventListener('change', handleTabletChangeThree);
