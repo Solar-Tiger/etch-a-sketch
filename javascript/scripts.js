@@ -3,6 +3,7 @@
 const gridContainer = document.querySelector('.grid-square-container');
 const changeGridSizeBtn = document.querySelector('.change-grid-size-btn');
 let userGridSizeChoice;
+let gridSize = 4;
 
 createNewGrid();
 
@@ -33,7 +34,7 @@ changeGridSizeBtn.addEventListener('click', () => {
 });
 
 function createNewGrid() {
-  let gridSize = 4;
+  // let gridSize = 4;
   for (let i = 0; i < gridSize * gridSize; i++) {
     const gridDiv = document.createElement('div');
     gridDiv.classList.add('etch-a-sketch-square');
@@ -117,14 +118,42 @@ function getRandomNumber() {
   return randomNumber;
 }
 
-// const mediaQuery = window.matchMedia('(min-width: 768px');
+const mediaQuery = window.matchMedia('min-width: 459px');
+const mediaQueryTwo = window.matchMedia('min-width: 460px');
 
-// function handleTabletChange(e) {
-//   if (e.matches) {
-//     console.log('It matched, sir');
-//   }
-// }
+function handleTabletChange(e) {
+  if (e.matches) {
+    const gridDiv = document.querySelectorAll('.etch-a-sketch-square');
 
-// mediaQuery.addEventListener('change', handleTabletChange);
+    gridContainer.style.width = '300px';
+    gridContainer.style.height = '300px';
 
-// handleTabletChange(mediaQuery);
+    gridDiv.forEach((div) => {
+      div.style.width = `${gridContainer.clientWidth / gridSize}px`;
+      div.style.height = `${gridContainer.clientHeight / gridSize}px`;
+    });
+  }
+}
+
+function handleTabletChangeTwo(e) {
+  if (e.matches) {
+    const gridDiv = document.querySelectorAll('.etch-a-sketch-square');
+
+    gridContainer.style.width = '460px';
+    gridContainer.style.height = '460px';
+
+    console.log('Hi');
+
+    gridDiv.forEach((div) => {
+      div.style.width = `${gridContainer.clientWidth / gridSize}px`;
+      div.style.height = `${gridContainer.clientHeight / gridSize}px`;
+    });
+  }
+}
+
+mediaQuery.addEventListener('change', handleTabletChange);
+mediaQueryTwo.addEventListener('change', handleTabletChangeTwo);
+
+handleTabletChange(mediaQuery);
+
+handleTabletChangeTwo(mediaQueryTwo);
