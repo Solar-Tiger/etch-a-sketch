@@ -6,23 +6,41 @@
 .change-grid-size-btn {
   display: block;
   margin: 20px auto;
-  padding: 5px 3%;
+  padding: 5px 20px;
   font-size: 20px;
 }
 
 .grid-square-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
   margin: 0 auto 30px auto;
-  width: 300px;
-  height: 300px;
   border: 2px solid black;
 }
 
 .etch-a-sketch-square {
   box-sizing: border-box;
+  width: calc(100% / var(--square-size));
+  height: calc(100% / var(--square-size));
   border: 1px solid black;
+}
+
+@media (min-width: 340px) {
+  .grid-square-container {
+    max-width: 340px; /* Set your desired maximum width for smaller screens */
+    max-height: 340px; /* Set your desired maximum height for smaller screens */
+  }
+}
+
+@media (min-width: 768px) {
+  .grid-square-container {
+    max-width: 650px; /* Set your desired maximum width for smaller screens */
+    max-height: 650px; /* Set your desired maximum height for smaller screens */
+  }
+}
+
+@media (min-width: 1280px) {
+  .grid-square-container {
+    max-width: 800px; /* Set your desired maximum width for larger screens */
+    max-height: 800px; /* Set your desired maximum height for larger screens */
+  }
 }
