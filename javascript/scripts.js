@@ -64,7 +64,9 @@ function fillEtchASketchSquare() {
     let opacity = 0.1;
 
     square.addEventListener('mouseenter', (e) => {
-      e.target.style.backgroundColor = `rgb(${getRandomNumber()},${getRandomNumber()},${getRandomNumber()},${opacity})`;
+      // e.target.style.backgroundColor = `rgb(${getRandomNumber()},${getRandomNumber()},${getRandomNumber()},${opacity})`;
+
+      e.target.style.backgroundColor = userSelectedColor;
 
       if (opacity < 1) {
         opacity += 0.1;
