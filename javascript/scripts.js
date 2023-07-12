@@ -3,7 +3,8 @@
 const gridContainer = document.querySelector('.grid-square-container');
 const changeGridSizeBtn = document.querySelector('.change-grid-size-btn');
 let userGridSizeChoice;
-let gridSize = 3;
+let gridSize = 5;
+let userSelectedColor;
 
 createNewGrid();
 
@@ -11,6 +12,7 @@ let etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
 
 fillEtchASketchSquare();
 fillEtchASketchSquareTouch();
+getSelectedColor();
 
 changeGridSizeBtn.addEventListener('click', () => {
   userGridSizeChoice = parseInt(
@@ -82,7 +84,9 @@ function fillEtchASketchSquareTouch() {
 let previousSquare;
 
 function touchStart(e) {
-  e.target.style.backgroundColor = `rgba(${getRandomNumber()},${getRandomNumber()},${getRandomNumber()})`;
+  // e.target.style.backgroundColor = `rgba(${getRandomNumber()},${getRandomNumber()},${getRandomNumber()})`;
+
+  e.target.style.backgroundColor = userSelectedColor;
 
   previousSquare = e.target;
 }
@@ -102,7 +106,9 @@ function touchMove(e) {
     const currentSquare = touchedSquare;
 
     if (currentSquare !== previousSquare) {
-      currentSquare.style.backgroundColor = `rgba(${getRandomNumber()},${getRandomNumber()},${getRandomNumber()})`;
+      // currentSquare.style.backgroundColor = `rgba(${getRandomNumber()},${getRandomNumber()},${getRandomNumber()})`;
+
+      currentSquare.style.backgroundColor = userSelectedColor;
 
       previousSquare = currentSquare;
     }
@@ -121,4 +127,26 @@ function getRandomNumber() {
   let randomNumber = Math.floor(Math.random() * 256);
 
   return randomNumber;
+}
+
+function getSelectedColor() {
+  let selectedColor = document.querySelectorAll('.colors');
+
+  selectedColor.forEach((color) => {
+    color.addEventListener('click', () => {
+      if (color.classList[0] === 'red') {
+        userSelectedColor = `rgb(${255}, ${0}, ${0})`;
+      } else if (color.classList[0] === 'orange') {
+        userSelectedColor = `rgb(${255}, ${165}, ${0})`;
+      } else if (color.classList[0] === 'yellow') {
+        userSelectedColor = `rgb(${255}, ${255}, ${0})`;
+      } else if (color.classList[0] === 'green') {
+        userSelectedColor = `rgb(${0}, ${128}, ${0})`;
+      } else if (color.classList[0] === 'blue') {
+        userSelectedColor = `rgb(${0}, ${0}, ${255})`;
+      } else if (color.classList[0] === 'purple') {
+        userSelectedColor = `rgb(${128}, ${0}, ${128})`;
+      }
+    });
+  });
 }
