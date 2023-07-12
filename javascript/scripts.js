@@ -3,9 +3,7 @@
 const gridContainer = document.querySelector('.grid-square-container');
 const changeGridSizeBtn = document.querySelector('.change-grid-size-btn');
 let userGridSizeChoice;
-let gridSize = 4;
-
-gridContainer.style.setProperty('--square-size', gridSize);
+let gridSize = 6;
 
 createNewGrid();
 
@@ -36,6 +34,8 @@ changeGridSizeBtn.addEventListener('click', () => {
 });
 
 function createNewGrid() {
+  gridContainer.style.setProperty('--square-size', gridSize);
+
   for (let i = 0; i < gridSize * gridSize; i++) {
     const gridDiv = document.createElement('div');
 
@@ -46,6 +46,8 @@ function createNewGrid() {
 }
 
 function createUserNewGrid(userGridInput) {
+  gridContainer.style.setProperty('--square-size', userGridInput);
+
   for (let i = 0; i < userGridInput * userGridInput; i++) {
     const gridDiv = document.createElement('div');
 
