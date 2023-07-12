@@ -37,11 +37,19 @@
     max-width: 650px; /* Set your desired maximum width for smaller screens */
     max-height: 650px; /* Set your desired maximum height for smaller screens */
   }
+
+  .change-grid-size-btn {
+    font-size: 40px;
+  }
 }
 
 @media (min-width: 1280px) {
   .grid-square-container {
     max-width: 800px; /* Set your desired maximum width for larger screens */
     max-height: 800px; /* Set your desired maximum height for larger screens */
+  }
+
+  .change-grid-size-btn {
+    font-size: 55px;
   }
 }
