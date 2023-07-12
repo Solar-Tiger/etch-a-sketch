@@ -87,8 +87,6 @@ function touchStart(e) {
   previousSquare = e.target;
 }
 
-// let previousSquare = null;
-
 function touchMove(e) {
   e.preventDefault();
 
