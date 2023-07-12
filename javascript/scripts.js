@@ -3,7 +3,7 @@
 const gridContainer = document.querySelector('.grid-square-container');
 const changeGridSizeBtn = document.querySelector('.change-grid-size-btn');
 let userGridSizeChoice;
-let gridSize = 6;
+let gridSize = 3;
 
 createNewGrid();
 
@@ -79,11 +79,15 @@ function fillEtchASketchSquareTouch() {
   });
 }
 
+let previousSquare;
+
 function touchStart(e) {
   e.target.style.backgroundColor = `rgba(${getRandomNumber()},${getRandomNumber()},${getRandomNumber()})`;
+
+  previousSquare = e.target;
 }
 
-let previousSquare = null;
+// let previousSquare = null;
 
 function touchMove(e) {
   e.preventDefault();
