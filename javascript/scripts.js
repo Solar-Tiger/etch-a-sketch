@@ -48,9 +48,9 @@ function createNewGrid() {
 function createUserNewGrid(userGridInput) {
   for (let i = 0; i < userGridInput * userGridInput; i++) {
     const gridDiv = document.createElement('div');
+
     gridDiv.classList.add('etch-a-sketch-square');
-    gridDiv.style.width = `${gridContainer.clientWidth / userGridInput}px`;
-    gridDiv.style.height = `${gridContainer.clientHeight / userGridInput}px`;
+
     gridContainer.appendChild(gridDiv);
   }
 }
