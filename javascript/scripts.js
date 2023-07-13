@@ -144,7 +144,9 @@ function getRandomNumber() {
 }
 
 function getRandomColor() {
-  return (rainbow = `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()})`);
+  let rainbow = `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()})`;
+
+  return rainbow;
 }
 
 function resetGrid() {
