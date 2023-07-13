@@ -70,9 +70,11 @@ function fillEtchASketchSquare() {
     let opacity = 0.1;
 
     square.addEventListener('mouseenter', (e) => {
-      // e.target.style.backgroundColor = `rgb(${getRandomNumber()},${getRandomNumber()},${getRandomNumber()},${opacity})`;
-
-      e.target.style.backgroundColor = userSelectedColor;
+      if (userSelectedColor === 'rainbow') {
+        e.target.style.backgroundColor = getRandomColor();
+      } else {
+        e.target.style.backgroundColor = userSelectedColor;
+      }
 
       if (opacity < 1) {
         opacity += 0.1;
@@ -145,6 +147,12 @@ function getRandomNumber() {
 
 function getRandomColor() {
   let rainbow = `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()})`;
+
+  return rainbow;
+}
+
+function getRandomColorWithOpacity(opacity) {
+  let rainbow = `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()}, ${opacity})`;
 
   return rainbow;
 }
