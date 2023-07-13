@@ -76,6 +76,10 @@
   background-color: white;
 }
 
+.rainbow {
+  background: linear-gradient(45deg, red, orange, yellow, green, blue, purple);
+}
+
 @media (min-width: 340px) {
   .grid-square-container {
     max-width: 340px; /* Set your desired maximum width for smaller screens */

@@ -92,9 +92,11 @@ function fillEtchASketchSquareTouch() {
 let previousSquare;
 
 function touchStart(e) {
-  // e.target.style.backgroundColor = `rgba(${getRandomNumber()},${getRandomNumber()},${getRandomNumber()})`;
-
-  e.target.style.backgroundColor = userSelectedColor;
+  if (userSelectedColor === 'rainbow') {
+    e.target.style.backgroundColor = getRandomColor();
+  } else {
+    e.target.style.backgroundColor = userSelectedColor;
+  }
 
   previousSquare = e.target;
 }
@@ -116,6 +118,10 @@ function touchMove(e) {
     if (currentSquare !== previousSquare) {
       // currentSquare.style.backgroundColor = `rgba(${getRandomNumber()},${getRandomNumber()},${getRandomNumber()})`;
 
+      if (userSelectedColor === 'rainbow') {
+        currentSquare.style.backgroundColor = getRandomColor();
+      }
+
       currentSquare.style.backgroundColor = userSelectedColor;
 
       previousSquare = currentSquare;
@@ -135,6 +141,10 @@ function getRandomNumber() {
   let randomNumber = Math.floor(Math.random() * 256);
 
   return randomNumber;
+}
+
+function getRandomColor() {
+  return (rainbow = `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()})`);
 }
 
 function resetGrid() {
@@ -164,6 +174,8 @@ function getSelectedColor() {
         userSelectedColor = `rgb(${0}, ${0}, ${0})`;
       } else if (color.classList[0] === 'white') {
         userSelectedColor = `rgb(${255}, ${255}, ${255})`;
+      } else if (color.classList[0] === 'rainbow') {
+        userSelectedColor = 'rainbow';
       }
     });
   });
