@@ -162,6 +162,8 @@ function getSelectedColor() {
         userSelectedColor = `rgb(${128}, ${0}, ${128})`;
       } else if (color.classList[0] === 'black') {
         userSelectedColor = `rgb(${0}, ${0}, ${0})`;
+      } else if (color.classList[0] === 'white') {
+        userSelectedColor = `rgb(${255}, ${255}, ${255})`;
       }
     });
   });

@@ -72,6 +72,10 @@
   background-color: black;
 }
 
+.white {
+  background-color: white;
+}
+
 @media (min-width: 340px) {
   .grid-square-container {
     max-width: 340px; /* Set your desired maximum width for smaller screens */
