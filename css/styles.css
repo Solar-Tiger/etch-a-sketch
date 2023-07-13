@@ -11,7 +11,7 @@
 .change-grid-size-btn,
 .reset-grid {
   display: block;
-  margin: 20px;
+  margin: 20px 10px;
   padding: 5px 20px;
   font-size: 20px;
 }
@@ -72,6 +72,11 @@
   .grid-square-container {
     max-width: 340px; /* Set your desired maximum width for smaller screens */
     max-height: 340px; /* Set your desired maximum height for smaller screens */
+  }
+
+  .change-grid-size-btn,
+  .reset-grid {
+    font-size: 18px;
   }
 
   .colors-container {
