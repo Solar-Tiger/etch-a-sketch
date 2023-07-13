@@ -160,6 +160,8 @@ function getSelectedColor() {
         userSelectedColor = `rgb(${0}, ${0}, ${255})`;
       } else if (color.classList[0] === 'purple') {
         userSelectedColor = `rgb(${128}, ${0}, ${128})`;
+      } else if (color.classList[0] === 'black') {
+        userSelectedColor = `rgb(${0}, ${0}, ${0})`;
       }
     });
   });
