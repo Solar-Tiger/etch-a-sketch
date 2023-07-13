@@ -2,6 +2,7 @@
 /* eslint-disable prefer-const */
 const gridContainer = document.querySelector('.grid-square-container');
 const changeGridSizeBtn = document.querySelector('.change-grid-size-btn');
+const gridResetBtn = document.querySelector('.reset-grid');
 let userGridSizeChoice;
 let gridSize = 5;
 let userSelectedColor;
@@ -23,6 +24,7 @@ changeGridSizeBtn.addEventListener('click', () => {
     while (gridContainer.lastElementChild) {
       gridContainer.removeChild(gridContainer.lastElementChild);
     }
+
     createUserNewGrid(userGridSizeChoice);
 
     etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
@@ -33,6 +35,10 @@ changeGridSizeBtn.addEventListener('click', () => {
     alert('Incorrect, try again');
     return 0;
   }
+});
+
+gridResetBtn.addEventListener('click', () => {
+  resetGrid();
 });
 
 function createNewGrid() {
@@ -129,6 +135,12 @@ function getRandomNumber() {
   let randomNumber = Math.floor(Math.random() * 256);
 
   return randomNumber;
+}
+
+function resetGrid() {
+  etchASketchSquare.forEach((square) => {
+    square.style.backgroundColor = `rgb(${255}, ${255}, ${255})`;
+  });
 }
 
 function getSelectedColor() {

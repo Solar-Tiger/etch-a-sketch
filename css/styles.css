@@ -3,9 +3,15 @@
   padding: 0;
 }
 
-.change-grid-size-btn {
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.change-grid-size-btn,
+.reset-grid {
   display: block;
-  margin: 20px auto;
+  margin: 20px;
   padding: 5px 20px;
   font-size: 20px;
 }
@@ -80,7 +86,8 @@
     max-height: 650px; /* Set your desired maximum height for smaller screens */
   }
 
-  .change-grid-size-btn {
+  .change-grid-size-btn,
+  .reset-grid {
     font-size: 30px;
   }
 
@@ -96,7 +103,8 @@
     max-height: 800px; /* Set your desired maximum height for larger screens */
   }
 
-  .change-grid-size-btn {
+  .change-grid-size-btn,
+  .reset-grid {
     font-size: 45px;
   }
 
