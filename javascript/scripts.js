@@ -113,9 +113,9 @@ let previousSquare;
 
 function touchStart(e) {
   if (userSelectedColor === 'rainbow') {
-    e.target.style.backgroundColor = getRandomColor();
+    e.target.style.backgroundColor = getRandomColorWithOpacity(1);
   } else {
-    e.target.style.backgroundColor = userSelectedColor;
+    e.target.style.backgroundColor = getSelectedColorAndOpacity(1);
   }
 
   previousSquare = e.target;
@@ -136,13 +136,11 @@ function touchMove(e) {
     const currentSquare = touchedSquare;
 
     if (currentSquare !== previousSquare) {
-      // currentSquare.style.backgroundColor = `rgba(${getRandomNumber()},${getRandomNumber()},${getRandomNumber()})`;
-
       if (userSelectedColor === 'rainbow') {
-        currentSquare.style.backgroundColor = getRandomColor();
+        currentSquare.style.backgroundColor = getRandomColorWithOpacity(1);
+      } else {
+        currentSquare.style.backgroundColor = getSelectedColorAndOpacity(1);
       }
-
-      currentSquare.style.backgroundColor = userSelectedColor;
 
       previousSquare = currentSquare;
     }
