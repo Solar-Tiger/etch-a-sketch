@@ -69,6 +69,12 @@ function fillEtchASketchSquare() {
   etchASketchSquare.forEach((square) => {
     let opacity = 0.1;
 
+    let storedColor = userSelectedColor;
+
+    if (storedColor !== userSelectedColor) {
+      opacity = 0.1;
+    }
+
     square.addEventListener('mouseenter', (e) => {
       if (userSelectedColor === 'rainbow') {
         e.target.style.backgroundColor = getRandomColorWithOpacity(opacity);
@@ -181,6 +187,7 @@ function getSelectedColor() {
       } else if (color.classList[0] === 'rainbow') {
         userSelectedColor = 'rainbow';
       }
+      fillEtchASketchSquare();
     });
   });
 }
