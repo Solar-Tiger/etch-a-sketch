@@ -3,20 +3,16 @@
 const gridContainer = document.querySelector('.grid-square-container');
 const changeGridSizeBtn = document.querySelector('.change-grid-size-btn');
 const gridResetBtn = document.querySelector('.reset-grid');
-let userGridSizeChoice;
-let gridSize = 5;
+let etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
 let userSelectedColor;
 
 createNewGrid();
-
-let etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
-
 fillEtchASketchSquare();
 fillEtchASketchSquareTouch();
 getSelectedColor();
 
 changeGridSizeBtn.addEventListener('click', () => {
-  userGridSizeChoice = parseInt(
+  let userGridSizeChoice = parseInt(
     prompt('Please pick a number between 2 and 100'),
     10
   );
@@ -42,6 +38,8 @@ gridResetBtn.addEventListener('click', () => {
 });
 
 function createNewGrid() {
+  let gridSize = 5;
+
   gridContainer.style.setProperty('--square-size', gridSize);
 
   for (let i = 0; i < gridSize * gridSize; i++) {
