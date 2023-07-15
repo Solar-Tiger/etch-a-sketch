@@ -73,7 +73,7 @@ function fillEtchASketchSquare() {
       if (userSelectedColor === 'rainbow') {
         e.target.style.backgroundColor = getRandomColor();
       } else {
-        e.target.style.backgroundColor = userSelectedColor;
+        e.target.style.backgroundColor = getSelectedColorAndOpacity(opacity);
       }
 
       if (opacity < 1) {
@@ -189,4 +189,78 @@ function getSelectedColor() {
       }
     });
   });
+}
+
+let mySelectedColor;
+
+function getSelectedColorAndOpacity(newOpacity) {
+  let selectedColor = document.querySelectorAll('.colors');
+
+  selectedColor.forEach((color) => {
+    color.addEventListener('click', () => {
+      if (color.classList[0] === 'red') {
+        mySelectedColor = `rgb(${255}, ${0}, ${0}, ${newOpacity})`;
+      }
+      if (color.classList[0] === 'orange') {
+        mySelectedColor = `rgb(${255}, ${165}, ${0}, ${newOpacity})`;
+      }
+      if (color.classList[0] === 'yellow') {
+        mySelectedColor = `rgb(${255}, ${255}, ${0}, ${newOpacity})`;
+      }
+      if (color.classList[0] === 'green') {
+        mySelectedColor = `rgb(${0}, ${128}, ${0}, ${newOpacity})`;
+      }
+      if (color.classList[0] === 'blue') {
+        mySelectedColor = `rgb(${0}, ${0}, ${255}, ${newOpacity})`;
+      }
+      if (color.classList[0] === 'purple') {
+        mySelectedColor = `rgb(${128}, ${0}, ${128}, ${newOpacity})`;
+      }
+      if (color.classList[0] === 'black') {
+        mySelectedColor = `rgb(${0}, ${0}, ${0}, ${newOpacity})`;
+      }
+      if (color.classList[0] === 'white') {
+        mySelectedColor = `rgb(${255}, ${255}, ${255}, ${newOpacity})`;
+      }
+      if (color.classList[0] === 'rainbow') {
+        mySelectedColor = 'rainbow';
+      }
+    });
+  });
+
+  return mySelectedColor;
+}
+
+const gridSquare = document.querySelectorAll('.square');
+const btns = document.querySelectorAll('.color');
+
+let color;
+
+btns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    if (btn.textContent === 'Red') {
+      color = 'red';
+    } else if (btn.textContent === 'Blue') {
+      color = 'blue';
+    }
+  });
+});
+
+gridSquare.forEach((square) => {
+  let opacity = 0.1;
+  square.addEventListener('mouseenter', () => {
+    square.style.backgroundColor = changedColor(opacity);
+    if (opacity < 1) {
+      opacity += 0.1;
+    }
+  });
+});
+
+function changedColor(updated) {
+  if (color === 'red') {
+    return `rgb(${255}, ${0}, ${0}, ${updated})`;
+  }
+  if (color === 'blue') {
+    return `rgb(${0}, ${0}, ${255}, ${updated})`;
+  }
 }
