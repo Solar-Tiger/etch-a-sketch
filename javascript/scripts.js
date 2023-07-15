@@ -3,10 +3,12 @@
 const gridContainer = document.querySelector('.grid-square-container');
 const changeGridSizeBtn = document.querySelector('.change-grid-size-btn');
 const gridResetBtn = document.querySelector('.reset-grid');
-let etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
 let userSelectedColor;
 
 createNewGrid();
+
+let etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
+
 fillEtchASketchSquare();
 fillEtchASketchSquareTouch();
 getSelectedColor();
@@ -69,7 +71,7 @@ function fillEtchASketchSquare() {
 
     square.addEventListener('mouseenter', (e) => {
       if (userSelectedColor === 'rainbow') {
-        e.target.style.backgroundColor = getRandomColor();
+        e.target.style.backgroundColor = getRandomColorWithOpacity(opacity);
       } else {
         e.target.style.backgroundColor = getSelectedColorAndOpacity(opacity);
       }
@@ -143,12 +145,6 @@ function getRandomNumber() {
   return randomNumber;
 }
 
-function getRandomColor() {
-  let rainbow = `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()})`;
-
-  return rainbow;
-}
-
 function getRandomColorWithOpacity(opacity) {
   let rainbow = `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()}, ${opacity})`;
 
@@ -167,21 +163,21 @@ function getSelectedColor() {
   selectedColor.forEach((color) => {
     color.addEventListener('click', () => {
       if (color.classList[0] === 'red') {
-        userSelectedColor = `rgb(${255}, ${0}, ${0})`;
+        userSelectedColor = 'red';
       } else if (color.classList[0] === 'orange') {
-        userSelectedColor = `rgb(${255}, ${165}, ${0})`;
+        userSelectedColor = 'orange';
       } else if (color.classList[0] === 'yellow') {
-        userSelectedColor = `rgb(${255}, ${255}, ${0})`;
+        userSelectedColor = 'yellow';
       } else if (color.classList[0] === 'green') {
-        userSelectedColor = `rgb(${0}, ${128}, ${0})`;
+        userSelectedColor = 'green';
       } else if (color.classList[0] === 'blue') {
-        userSelectedColor = `rgb(${0}, ${0}, ${255})`;
+        userSelectedColor = 'blue';
       } else if (color.classList[0] === 'purple') {
-        userSelectedColor = `rgb(${128}, ${0}, ${128})`;
+        userSelectedColor = 'purple';
       } else if (color.classList[0] === 'black') {
-        userSelectedColor = `rgb(${0}, ${0}, ${0})`;
+        userSelectedColor = 'black';
       } else if (color.classList[0] === 'white') {
-        userSelectedColor = `rgb(${255}, ${255}, ${255})`;
+        userSelectedColor = 'white';
       } else if (color.classList[0] === 'rainbow') {
         userSelectedColor = 'rainbow';
       }
@@ -189,76 +185,32 @@ function getSelectedColor() {
   });
 }
 
-let mySelectedColor;
-
-function getSelectedColorAndOpacity(newOpacity) {
-  let selectedColor = document.querySelectorAll('.colors');
-
-  selectedColor.forEach((color) => {
-    color.addEventListener('click', () => {
-      if (color.classList[0] === 'red') {
-        mySelectedColor = `rgb(${255}, ${0}, ${0}, ${newOpacity})`;
-      }
-      if (color.classList[0] === 'orange') {
-        mySelectedColor = `rgb(${255}, ${165}, ${0}, ${newOpacity})`;
-      }
-      if (color.classList[0] === 'yellow') {
-        mySelectedColor = `rgb(${255}, ${255}, ${0}, ${newOpacity})`;
-      }
-      if (color.classList[0] === 'green') {
-        mySelectedColor = `rgb(${0}, ${128}, ${0}, ${newOpacity})`;
-      }
-      if (color.classList[0] === 'blue') {
-        mySelectedColor = `rgb(${0}, ${0}, ${255}, ${newOpacity})`;
-      }
-      if (color.classList[0] === 'purple') {
-        mySelectedColor = `rgb(${128}, ${0}, ${128}, ${newOpacity})`;
-      }
-      if (color.classList[0] === 'black') {
-        mySelectedColor = `rgb(${0}, ${0}, ${0}, ${newOpacity})`;
-      }
-      if (color.classList[0] === 'white') {
-        mySelectedColor = `rgb(${255}, ${255}, ${255}, ${newOpacity})`;
-      }
-      if (color.classList[0] === 'rainbow') {
-        mySelectedColor = 'rainbow';
-      }
-    });
-  });
-
-  return mySelectedColor;
-}
-
-const gridSquare = document.querySelectorAll('.square');
-const btns = document.querySelectorAll('.color');
-
-let color;
-
-btns.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    if (btn.textContent === 'Red') {
-      color = 'red';
-    } else if (btn.textContent === 'Blue') {
-      color = 'blue';
-    }
-  });
-});
-
-gridSquare.forEach((square) => {
-  let opacity = 0.1;
-  square.addEventListener('mouseenter', () => {
-    square.style.backgroundColor = changedColor(opacity);
-    if (opacity < 1) {
-      opacity += 0.1;
-    }
-  });
-});
-
-function changedColor(updated) {
-  if (color === 'red') {
-    return `rgb(${255}, ${0}, ${0}, ${updated})`;
+function getSelectedColorAndOpacity(squareOpacity) {
+  if (userSelectedColor === 'red') {
+    return `rgb(${255}, ${0}, ${0}, ${squareOpacity})`;
   }
-  if (color === 'blue') {
-    return `rgb(${0}, ${0}, ${255}, ${updated})`;
+  if (userSelectedColor === 'orange') {
+    return `rgb(${255}, ${165}, ${0}, ${squareOpacity})`;
+  }
+  if (userSelectedColor === 'yellow') {
+    return `rgb(${255}, ${255}, ${0}, ${squareOpacity})`;
+  }
+  if (userSelectedColor === 'green') {
+    return `rgb(${0}, ${128}, ${0}, ${squareOpacity})`;
+  }
+  if (userSelectedColor === 'blue') {
+    return `rgb(${0}, ${0}, ${255}, ${squareOpacity})`;
+  }
+  if (userSelectedColor === 'purple') {
+    return `rgb(${128}, ${0}, ${128}, ${squareOpacity})`;
+  }
+  if (userSelectedColor === 'black') {
+    return `rgb(${0}, ${0}, ${0}, ${squareOpacity})`;
+  }
+  if (userSelectedColor === 'white') {
+    return `rgb(${255}, ${255}, ${255}, ${squareOpacity})`;
+  }
+  if (userSelectedColor === 'rainbow') {
+    return 'rainbow';
   }
 }
