@@ -192,6 +192,7 @@ function getSelectedColor() {
         userSelectedColor = 'rainbow';
       }
       fillEtchASketchSquare();
+      fillEtchASketchSquareTouch();
     });
   });
 }
@@ -239,14 +240,12 @@ function toggleOpacity() {
     if (opacitySelection.textContent === 'Opacity off') {
       opacitySelection.textContent = 'Opacity on';
       currentOpacity = 'opacity on';
-      fillEtchASketchSquare();
-      fillEtchASketchSquareTouch();
     } else {
       opacitySelection.textContent = 'Opacity off';
       currentOpacity = 'opacity off';
-      fillEtchASketchSquare();
-      fillEtchASketchSquareTouch();
     }
+    fillEtchASketchSquare();
+    fillEtchASketchSquareTouch();
   });
 }
 
