@@ -8,12 +8,18 @@
   justify-content: center;
 }
 
+.opacity-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .change-grid-size-btn,
-.reset-grid {
+.reset-grid,
+.opacity-toggle {
   display: block;
   margin: 20px 10px;
   padding: 5px 20px;
-  font-size: 20px;
 }
 
 .grid-square-container {
@@ -87,7 +93,9 @@
   }
 
   .change-grid-size-btn,
-  .reset-grid {
+  .reset-grid,
+  .opacity-display,
+  .opacity-toggle {
     font-size: 16px;
   }
 
@@ -104,7 +112,9 @@
   }
 
   .change-grid-size-btn,
-  .reset-grid {
+  .reset-grid,
+  .opacity-display,
+  .opacity-toggle {
     font-size: 30px;
   }
 
@@ -121,7 +131,9 @@
   }
 
   .change-grid-size-btn,
-  .reset-grid {
+  .reset-grid,
+  .opacity-display,
+  .opacity-toggle {
     font-size: 45px;
   }
 

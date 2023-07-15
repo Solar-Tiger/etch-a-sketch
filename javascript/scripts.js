@@ -3,7 +3,9 @@
 const gridContainer = document.querySelector('.grid-square-container');
 const changeGridSizeBtn = document.querySelector('.change-grid-size-btn');
 const gridResetBtn = document.querySelector('.reset-grid');
+const opacityBtn = document.querySelector('.opacity-toggle');
 let userSelectedColor;
+let currentOpacity = 'opacity off';
 
 createNewGrid();
 
@@ -37,6 +39,8 @@ changeGridSizeBtn.addEventListener('click', () => {
 
 gridResetBtn.addEventListener('click', () => {
   resetGrid();
+  fillEtchASketchSquare();
+  fillEtchASketchSquareTouch();
 });
 
 function createNewGrid() {
@@ -67,12 +71,20 @@ function createUserNewGrid(userGridInput) {
 
 function fillEtchASketchSquare() {
   etchASketchSquare.forEach((square) => {
-    let opacity = 0.1;
+    let opacity;
+
+    if (currentOpacity === 'opacity off') {
+      opacity = 1;
+    } else if (currentOpacity === 'opacity on') {
+      opacity = 0.1;
+    }
 
     let storedColor = userSelectedColor;
 
-    if (storedColor !== userSelectedColor) {
+    if (storedColor !== userSelectedColor && opacity === 'opacity on') {
       opacity = 0.1;
+    } else if (storedColor !== userSelectedColor && opacity === 'opacity off') {
+      opacity = 1;
     }
 
     square.addEventListener('mouseenter', (e) => {
@@ -157,12 +169,6 @@ function getRandomColorWithOpacity(opacity) {
   return rainbow;
 }
 
-function resetGrid() {
-  etchASketchSquare.forEach((square) => {
-    square.style.backgroundColor = `rgb(${255}, ${255}, ${255})`;
-  });
-}
-
 function getSelectedColor() {
   let selectedColor = document.querySelectorAll('.colors');
 
@@ -221,3 +227,29 @@ function getSelectedColorAndOpacity(squareOpacity) {
     return 'rainbow';
   }
 }
+
+function resetGrid() {
+  etchASketchSquare.forEach((square) => {
+    square.style.backgroundColor = `rgb(${255}, ${255}, ${255})`;
+  });
+}
+
+function toggleOpacity() {
+  opacityBtn.addEventListener('click', () => {
+    let opacitySelection = document.querySelector('.opacity-display');
+
+    if (opacitySelection.textContent === 'Opacity off') {
+      opacitySelection.textContent = 'Opacity on';
+      currentOpacity = 'opacity on';
+      fillEtchASketchSquare();
+      fillEtchASketchSquareTouch();
+    } else {
+      opacitySelection.textContent = 'Opacity off';
+      currentOpacity = 'opacity off';
+      fillEtchASketchSquare();
+      fillEtchASketchSquareTouch();
+    }
+  });
+}
+
+toggleOpacity();
