@@ -229,7 +229,9 @@ function getSelectedColorAndOpacity(squareOpacity) {
 
 function resetGrid() {
   etchASketchSquare.forEach((square) => {
-    square.style.backgroundColor = `rgb(${255}, ${255}, ${255})`;
+    let blankSquare = square.style.backgroundColor;
+
+    blankSquare.style.backgroundColor = `rgb(${255}, ${255}, ${255})`;
   });
 }
 
