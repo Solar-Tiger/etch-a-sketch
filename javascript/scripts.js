@@ -109,16 +109,33 @@ function fillEtchASketchSquareTouch() {
   });
 }
 
-let previousSquare;
+let previousSquare = null;
+let opacityMap = new Map();
 
 function touchStart(e) {
-  if (userSelectedColor === 'rainbow') {
-    e.target.style.backgroundColor = getRandomColorWithOpacity(1);
-  } else {
-    e.target.style.backgroundColor = getSelectedColorAndOpacity(1);
+  previousSquare = e.target;
+
+  let touchOpacity;
+
+  if (!opacityMap.has(previousSquare) && currentOpacity === 'opacity on') {
+    opacityMap.set(previousSquare, 0.1);
   }
 
-  previousSquare = e.target;
+  if (currentOpacity === 'opacity off') {
+    touchOpacity = 1;
+  } else if (currentOpacity === 'opacity on') {
+    touchOpacity = opacityMap.get(previousSquare);
+  }
+
+  if (userSelectedColor === 'rainbow') {
+    e.target.style.backgroundColor = getRandomColorWithOpacity(touchOpacity);
+  } else {
+    e.target.style.backgroundColor = getSelectedColorAndOpacity(touchOpacity);
+  }
+
+  if (opacityMap.get(previousSquare) < 1 && currentOpacity === 'opacity on') {
+    opacityMap.set(previousSquare, opacityMap.get(previousSquare) + 0.1);
+  }
 }
 
 function touchMove(e) {
@@ -229,7 +246,7 @@ function getSelectedColorAndOpacity(squareOpacity) {
 
 function resetGrid() {
   etchASketchSquare.forEach((square) => {
-    let blankSquare = square.style.backgroundColor;
+    let blankSquare = square;
 
     blankSquare.style.backgroundColor = `rgb(${255}, ${255}, ${255})`;
   });
