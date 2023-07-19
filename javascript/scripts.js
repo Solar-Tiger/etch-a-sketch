@@ -6,15 +6,11 @@ const gridResetBtn = document.querySelector('.reset-grid');
 const opacityBtn = document.querySelector('.opacity-toggle');
 let userSelectedColor;
 let currentOpacity = 'opacity off';
-
 createNewGrid();
-
 let etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
-
 fillEtchASketchSquare();
 fillEtchASketchSquareTouch();
 getSelectedColor();
-
 changeGridSizeBtn.addEventListener('click', () => {
   let userGridSizeChoice = parseInt(
     prompt('Please pick a number between 2 and 100'),
@@ -24,11 +20,9 @@ changeGridSizeBtn.addEventListener('click', () => {
     while (gridContainer.lastElementChild) {
       gridContainer.removeChild(gridContainer.lastElementChild);
     }
-
     createUserNewGrid(userGridSizeChoice);
-
     etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
-
+    opacityMap.clear();
     fillEtchASketchSquare();
     fillEtchASketchSquareTouch();
   } else {
@@ -36,71 +30,54 @@ changeGridSizeBtn.addEventListener('click', () => {
     return 0;
   }
 });
-
 gridResetBtn.addEventListener('click', () => {
   resetGrid();
   fillEtchASketchSquare();
   fillEtchASketchSquareTouch();
 });
-
 function createNewGrid() {
   let gridSize = 5;
-
   gridContainer.style.setProperty('--square-size', gridSize);
-
   for (let i = 0; i < gridSize * gridSize; i++) {
     const gridDiv = document.createElement('div');
-
     gridDiv.classList.add('etch-a-sketch-square');
-
     gridContainer.appendChild(gridDiv);
   }
 }
-
 function createUserNewGrid(userGridInput) {
   gridContainer.style.setProperty('--square-size', userGridInput);
-
   for (let i = 0; i < userGridInput * userGridInput; i++) {
     const gridDiv = document.createElement('div');
-
     gridDiv.classList.add('etch-a-sketch-square');
-
     gridContainer.appendChild(gridDiv);
   }
 }
-
 function fillEtchASketchSquare() {
   etchASketchSquare.forEach((square) => {
     let opacity;
-
     if (currentOpacity === 'opacity off') {
       opacity = 1;
     } else if (currentOpacity === 'opacity on') {
       opacity = 0.1;
     }
-
     let storedColor = userSelectedColor;
-
     if (storedColor !== userSelectedColor && opacity === 'opacity on') {
       opacity = 0.1;
     } else if (storedColor !== userSelectedColor && opacity === 'opacity off') {
       opacity = 1;
     }
-
     square.addEventListener('mouseenter', (e) => {
       if (userSelectedColor === 'rainbow') {
         e.target.style.backgroundColor = getRandomColorWithOpacity(opacity);
       } else {
         e.target.style.backgroundColor = getSelectedColorAndOpacity(opacity);
       }
-
       if (opacity < 1) {
         opacity += 0.1;
       }
     });
   });
 }
-
 function fillEtchASketchSquareTouch() {
   etchASketchSquare.forEach((square) => {
     square.addEventListener('touchstart', touchStart);
@@ -108,85 +85,85 @@ function fillEtchASketchSquareTouch() {
     square.addEventListener('touchend', touchEnd);
   });
 }
-
-let previousSquare = null;
+let previousSquare;
+let mySquare = null;
+let touchOpacity;
 let opacityMap = new Map();
-
 function touchStart(e) {
   previousSquare = e.target;
-
-  let touchOpacity;
-
+  mySquare = e.target;
   if (!opacityMap.has(previousSquare) && currentOpacity === 'opacity on') {
     opacityMap.set(previousSquare, 0.1);
   }
-
   if (currentOpacity === 'opacity off') {
     touchOpacity = 1;
   } else if (currentOpacity === 'opacity on') {
     touchOpacity = opacityMap.get(previousSquare);
   }
-
   if (userSelectedColor === 'rainbow') {
     e.target.style.backgroundColor = getRandomColorWithOpacity(touchOpacity);
   } else {
     e.target.style.backgroundColor = getSelectedColorAndOpacity(touchOpacity);
   }
-
   if (opacityMap.get(previousSquare) < 1 && currentOpacity === 'opacity on') {
     opacityMap.set(previousSquare, opacityMap.get(previousSquare) + 0.1);
   }
 }
-
 function touchMove(e) {
   e.preventDefault();
-
   const touchedSquare = document.elementFromPoint(
     e.touches[0].clientX,
     e.touches[0].clientY
   );
-
+  previousSquare = touchedSquare;
+  if (!opacityMap.has(previousSquare) && currentOpacity === 'opacity on') {
+    opacityMap.set(previousSquare, 0.1);
+  }
+  if (currentOpacity === 'opacity off') {
+    touchOpacity = 1;
+  } else if (currentOpacity === 'opacity on') {
+    touchOpacity = opacityMap.get(previousSquare);
+  }
   if (
     touchedSquare &&
     touchedSquare.classList.contains('etch-a-sketch-square')
   ) {
     const currentSquare = touchedSquare;
-
-    if (currentSquare !== previousSquare) {
+    if (currentSquare !== mySquare) {
       if (userSelectedColor === 'rainbow') {
-        currentSquare.style.backgroundColor = getRandomColorWithOpacity(1);
+        currentSquare.style.backgroundColor =
+          getRandomColorWithOpacity(touchOpacity);
       } else {
-        currentSquare.style.backgroundColor = getSelectedColorAndOpacity(1);
+        currentSquare.style.backgroundColor =
+          getSelectedColorAndOpacity(touchOpacity);
       }
-
-      previousSquare = currentSquare;
+      if (
+        opacityMap.get(previousSquare) < 1 &&
+        currentOpacity === 'opacity on'
+      ) {
+        opacityMap.set(previousSquare, opacityMap.get(previousSquare) + 0.1);
+      }
+      console.log(touchOpacity);
+      mySquare = currentSquare;
     }
   }
 }
-
 function touchEnd() {
   gridContainer.addEventListener('touchend', (e) => {
     e.preventDefault();
-
-    previousSquare = null;
+    mySquare = null;
   });
 }
-
 function getRandomNumber() {
   let randomNumber = Math.floor(Math.random() * 256);
-
   return randomNumber;
 }
-
 function getRandomColorWithOpacity(opacity) {
   let rainbow = `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()}, ${opacity})`;
-
   return rainbow;
 }
-
 function getSelectedColor() {
   let selectedColor = document.querySelectorAll('.colors');
-
   selectedColor.forEach((color) => {
     color.addEventListener('click', () => {
       if (color.classList[0] === 'red') {
@@ -208,12 +185,12 @@ function getSelectedColor() {
       } else if (color.classList[0] === 'rainbow') {
         userSelectedColor = 'rainbow';
       }
+      opacityMap.clear();
       fillEtchASketchSquare();
       fillEtchASketchSquareTouch();
     });
   });
 }
-
 function getSelectedColorAndOpacity(squareOpacity) {
   if (userSelectedColor === 'red') {
     return `rgb(${255}, ${0}, ${0}, ${squareOpacity})`;
@@ -243,19 +220,16 @@ function getSelectedColorAndOpacity(squareOpacity) {
     return 'rainbow';
   }
 }
-
 function resetGrid() {
   etchASketchSquare.forEach((square) => {
     let blankSquare = square;
-
     blankSquare.style.backgroundColor = `rgb(${255}, ${255}, ${255})`;
+    opacityMap.clear();
   });
 }
-
 function toggleOpacity() {
   opacityBtn.addEventListener('click', () => {
     let opacitySelection = document.querySelector('.opacity-display');
-
     if (opacitySelection.textContent === 'Opacity off') {
       opacitySelection.textContent = 'Opacity on';
       currentOpacity = 'opacity on';
@@ -263,9 +237,9 @@ function toggleOpacity() {
       opacitySelection.textContent = 'Opacity off';
       currentOpacity = 'opacity off';
     }
+    opacityMap.clear();
     fillEtchASketchSquare();
     fillEtchASketchSquareTouch();
   });
 }
-
 toggleOpacity();
