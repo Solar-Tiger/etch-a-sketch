@@ -18,8 +18,7 @@
 .change-grid-size-btn,
 .reset-grid,
 .opacity-toggle {
-  display: block;
-  margin: 20px 10px;
+  margin: 10px 10px;
   padding: 5px 20px;
 }
 
