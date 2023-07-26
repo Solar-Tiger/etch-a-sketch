@@ -175,6 +175,8 @@ function touchMove(e) {
       if (userSelectedColor === 'rainbow') {
         currentSquare.style.backgroundColor =
           getRandomColorWithOpacity(touchOpacity);
+      } else if (userSelectedColor === 'custom grid color') {
+        e.target.style.backgroundColor = getCustomGridColor(touchOpacity);
       } else {
         currentSquare.style.backgroundColor =
           getSelectedColorAndOpacity(touchOpacity);
