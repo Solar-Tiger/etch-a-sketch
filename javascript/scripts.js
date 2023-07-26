@@ -4,6 +4,7 @@ const gridContainer = document.querySelector('.grid-square-container');
 const changeGridSizeBtn = document.querySelector('.change-grid-size-btn');
 const gridResetBtn = document.querySelector('.reset-grid');
 const opacityBtn = document.querySelector('.opacity-toggle');
+const customGridColor = document.querySelector('.custom-grid-color');
 let userSelectedColor;
 let currentOpacity = 'opacity off';
 
@@ -91,6 +92,8 @@ function fillEtchASketchSquare() {
     square.addEventListener('mouseenter', (e) => {
       if (userSelectedColor === 'rainbow') {
         e.target.style.backgroundColor = getRandomColorWithOpacity(opacity);
+      } else if (userSelectedColor === 'custom grid color') {
+        e.target.style.backgroundColor = getCustomGridColor(opacity);
       } else {
         e.target.style.backgroundColor = getSelectedColorAndOpacity(opacity);
       }
@@ -101,6 +104,7 @@ function fillEtchASketchSquare() {
     });
   });
 }
+
 function fillEtchASketchSquareTouch() {
   etchASketchSquare.forEach((square) => {
     square.addEventListener('touchstart', touchStart);
@@ -130,6 +134,8 @@ function touchStart(e) {
 
   if (userSelectedColor === 'rainbow') {
     e.target.style.backgroundColor = getRandomColorWithOpacity(touchOpacity);
+  } else if (userSelectedColor === 'custom grid color') {
+    e.target.style.backgroundColor = getCustomGridColor(touchOpacity);
   } else {
     e.target.style.backgroundColor = getSelectedColorAndOpacity(touchOpacity);
   }
@@ -261,6 +267,28 @@ function getSelectedColorAndOpacity(squareOpacity) {
   if (userSelectedColor === 'rainbow') {
     return 'rainbow';
   }
+}
+
+let userCustomGridColor;
+
+customGridColor.addEventListener('input', () => {
+  userCustomGridColor = customGridColor.value;
+});
+
+customGridColor.addEventListener('change', () => {
+  userSelectedColor = 'custom grid color';
+
+  opacityMap.clear();
+  fillEtchASketchSquare();
+  fillEtchASketchSquareTouch();
+});
+
+function getCustomGridColor(newSquareOpacity) {
+  const r = parseInt(userCustomGridColor.slice(1, 3), 16);
+  const g = parseInt(userCustomGridColor.slice(3, 5), 16);
+  const b = parseInt(userCustomGridColor.slice(5, 7), 16);
+
+  return `rgb(${r}, ${g}, ${b}, ${newSquareOpacity})`;
 }
 
 function resetGrid() {
