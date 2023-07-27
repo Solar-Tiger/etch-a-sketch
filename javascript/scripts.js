@@ -202,20 +202,36 @@ function getSelectedColor() {
     color.addEventListener('click', () => {
       if (color.classList[0] === 'red') {
         userSelectedColor = 'red';
+
+        customOpacityDisplay.style.backgroundColor = `rgb(${255}, ${0}, ${0})`;
       } else if (color.classList[0] === 'orange') {
         userSelectedColor = 'orange';
+
+        customOpacityDisplay.style.backgroundColor = `rgb(${255}, ${165}, ${0})`;
       } else if (color.classList[0] === 'yellow') {
         userSelectedColor = 'yellow';
+
+        customOpacityDisplay.style.backgroundColor = `rgb(${255}, ${255}, ${0})`;
       } else if (color.classList[0] === 'green') {
         userSelectedColor = 'green';
+
+        customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${128}, ${0})`;
       } else if (color.classList[0] === 'blue') {
         userSelectedColor = 'blue';
+
+        customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${0}, ${255})`;
       } else if (color.classList[0] === 'purple') {
         userSelectedColor = 'purple';
+
+        customOpacityDisplay.style.backgroundColor = `rgb(${128}, ${0}, ${128})`;
       } else if (color.classList[0] === 'black') {
         userSelectedColor = 'black';
+
+        customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${0}, ${0})`;
       } else if (color.classList[0] === 'white') {
         userSelectedColor = 'white';
+
+        customOpacityDisplay.style.backgroundColor = `rgb(${255}, ${255}, ${255})`;
       } else if (color.classList[0] === 'rainbow') {
         userSelectedColor = 'rainbow';
       }
@@ -303,6 +319,10 @@ function getCustomOpacity() {
 
     if (userCustomGridColor) {
       customOpacityDisplay.style.backgroundColor = getCustomGridColor(
+        opacitySlider.value
+      );
+    } else {
+      customOpacityDisplay.style.backgroundColor = getSelectedColorAndOpacity(
         opacitySlider.value
       );
     }
