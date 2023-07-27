@@ -7,8 +7,10 @@ const opacityBtn = document.querySelector('.opacity-toggle');
 const customGridColor = document.querySelector('.custom-grid-color');
 const userSelectedOpacity = document.querySelector('.user-selected-opacity');
 const opacitySlider = document.querySelector('.opacity-slider');
+const customOpacityDisplay = document.querySelector('.custom-opacity-display');
 let userSelectedColor;
 let currentOpacity = 'opacity off';
+customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${0}, ${0})`;
 
 createNewGrid();
 
@@ -259,6 +261,8 @@ let userCustomGridColor;
 
 customGridColor.addEventListener('input', () => {
   userCustomGridColor = customGridColor.value;
+
+  customOpacityDisplay.style.backgroundColor = customGridColor.value;
 });
 
 customGridColor.addEventListener('change', () => {
@@ -293,9 +297,19 @@ function applySelectedColor(
   }
 }
 
-opacitySlider.addEventListener('input', () => {
-  userSelectedOpacity.textContent = opacitySlider.value;
-});
+function getCustomOpacity() {
+  opacitySlider.addEventListener('input', () => {
+    userSelectedOpacity.textContent = opacitySlider.value;
+
+    customOpacityDisplay.style.backgroundColor = getCustomGridColor(
+      opacitySlider.value
+    );
+
+    return getCustomGridColor(opacitySlider.value);
+  });
+}
+
+getCustomOpacity();
 
 function resetGrid() {
   etchASketchSquare.forEach((square) => {
