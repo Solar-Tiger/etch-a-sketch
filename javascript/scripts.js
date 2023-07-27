@@ -81,7 +81,7 @@ function fillEtchASketchSquare() {
     let opacity;
 
     if (currentOpacity === 'opacity off') {
-      opacity = 1;
+      opacity = opacitySlider.value;
     } else if (currentOpacity === 'opacity on') {
       opacity = 0.1;
     }
@@ -126,7 +126,7 @@ function touchStart(e) {
   }
 
   if (currentOpacity === 'opacity off') {
-    touchOpacity = 1;
+    touchOpacity = opacitySlider.value;
   } else if (currentOpacity === 'opacity on') {
     touchOpacity = opacityMap.get(previousSquare);
   }
@@ -153,7 +153,7 @@ function touchMove(e) {
   }
 
   if (currentOpacity === 'opacity off') {
-    touchOpacity = 1;
+    touchOpacity = opacitySlider.value;
   } else if (currentOpacity === 'opacity on') {
     touchOpacity = opacityMap.get(previousSquare);
   }
@@ -301,11 +301,11 @@ function getCustomOpacity() {
   opacitySlider.addEventListener('input', () => {
     userSelectedOpacity.textContent = opacitySlider.value;
 
-    customOpacityDisplay.style.backgroundColor = getCustomGridColor(
-      opacitySlider.value
-    );
-
-    return getCustomGridColor(opacitySlider.value);
+    if (userCustomGridColor) {
+      customOpacityDisplay.style.backgroundColor = getCustomGridColor(
+        opacitySlider.value
+      );
+    }
   });
 }
 
