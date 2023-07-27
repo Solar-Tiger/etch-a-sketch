@@ -50,6 +50,12 @@
   border: 1px solid black;
 }
 
+.color-custom-opacity {
+  width: 100px;
+  height: 40px;
+  border: 2px solid black;
+}
+
 .red {
   background-color: red;
 }
