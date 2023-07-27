@@ -5,6 +5,8 @@ const changeGridSizeBtn = document.querySelector('.change-grid-size-btn');
 const gridResetBtn = document.querySelector('.reset-grid');
 const opacityBtn = document.querySelector('.opacity-toggle');
 const customGridColor = document.querySelector('.custom-grid-color');
+const userSelectedOpacity = document.querySelector('.user-selected-opacity');
+const opacitySlider = document.querySelector('.opacity-slider');
 let userSelectedColor;
 let currentOpacity = 'opacity off';
 
@@ -174,6 +176,7 @@ function touchMove(e) {
     }
   }
 }
+
 function touchEnd() {
   gridContainer.addEventListener('touchend', (e) => {
     e.preventDefault();
@@ -289,6 +292,10 @@ function applySelectedColor(
       getSelectedColorAndOpacity(currentOpacity);
   }
 }
+
+opacitySlider.addEventListener('input', () => {
+  userSelectedOpacity.textContent = opacitySlider.value;
+});
 
 function resetGrid() {
   etchASketchSquare.forEach((square) => {
