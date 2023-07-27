@@ -75,6 +75,7 @@ function createUserNewGrid(userGridInput) {
 function fillEtchASketchSquare() {
   etchASketchSquare.forEach((square) => {
     let opacity;
+
     if (currentOpacity === 'opacity off') {
       opacity = 1;
     } else if (currentOpacity === 'opacity on') {
@@ -90,13 +91,7 @@ function fillEtchASketchSquare() {
     }
 
     square.addEventListener('mouseenter', (e) => {
-      if (userSelectedColor === 'rainbow') {
-        e.target.style.backgroundColor = getRandomColorWithOpacity(opacity);
-      } else if (userSelectedColor === 'custom grid color') {
-        e.target.style.backgroundColor = getCustomGridColor(opacity);
-      } else {
-        e.target.style.backgroundColor = getSelectedColorAndOpacity(opacity);
-      }
+      applySelectedColor(e.target, userSelectedColor, opacity);
 
       if (opacity < 1) {
         opacity += 0.1;
@@ -132,13 +127,7 @@ function touchStart(e) {
     touchOpacity = opacityMap.get(previousSquare);
   }
 
-  if (userSelectedColor === 'rainbow') {
-    e.target.style.backgroundColor = getRandomColorWithOpacity(touchOpacity);
-  } else if (userSelectedColor === 'custom grid color') {
-    e.target.style.backgroundColor = getCustomGridColor(touchOpacity);
-  } else {
-    e.target.style.backgroundColor = getSelectedColorAndOpacity(touchOpacity);
-  }
+  applySelectedColor(e.target, userSelectedColor, touchOpacity);
 
   if (opacityMap.get(previousSquare) < 1 && currentOpacity === 'opacity on') {
     opacityMap.set(previousSquare, opacityMap.get(previousSquare) + 0.1);
@@ -172,15 +161,7 @@ function touchMove(e) {
     const currentSquare = touchedSquare;
 
     if (currentSquare !== mySquare) {
-      if (userSelectedColor === 'rainbow') {
-        currentSquare.style.backgroundColor =
-          getRandomColorWithOpacity(touchOpacity);
-      } else if (userSelectedColor === 'custom grid color') {
-        currentSquare.style.backgroundColor = getCustomGridColor(touchOpacity);
-      } else {
-        currentSquare.style.backgroundColor =
-          getSelectedColorAndOpacity(touchOpacity);
-      }
+      applySelectedColor(currentSquare, userSelectedColor, touchOpacity);
 
       if (
         opacityMap.get(previousSquare) < 1 &&
@@ -291,6 +272,22 @@ function getCustomGridColor(newSquareOpacity) {
   const b = parseInt(userCustomGridColor.slice(5, 7), 16);
 
   return `rgb(${r}, ${g}, ${b}, ${newSquareOpacity})`;
+}
+
+function applySelectedColor(
+  targetSquare,
+  currentlySelectedColor,
+  currentOpacity
+) {
+  if (currentlySelectedColor === 'rainbow') {
+    targetSquare.style.backgroundColor =
+      getRandomColorWithOpacity(currentOpacity);
+  } else if (currentlySelectedColor === 'custom grid color') {
+    targetSquare.style.backgroundColor = getCustomGridColor(currentOpacity);
+  } else {
+    targetSquare.style.backgroundColor =
+      getSelectedColorAndOpacity(currentOpacity);
+  }
 }
 
 function resetGrid() {
