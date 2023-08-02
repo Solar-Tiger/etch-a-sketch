@@ -12,7 +12,7 @@ let userSelectedColor;
 let currentOpacity = 'opacity off';
 customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${0}, ${0})`;
 
-createNewGrid();
+createEtchASketchGrid();
 
 let etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
 
@@ -30,7 +30,7 @@ changeGridSizeBtn.addEventListener('click', () => {
       gridContainer.removeChild(gridContainer.lastElementChild);
     }
 
-    createUserNewGrid(userGridSizeChoice);
+    createEtchASketchGrid(userGridSizeChoice);
 
     etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
 
@@ -50,24 +50,14 @@ gridResetBtn.addEventListener('click', () => {
   fillEtchASketchSquareTouch();
 });
 
-function createNewGrid() {
-  let gridSize = 5;
+function createEtchASketchGrid(gridSize) {
+  if (!gridSize) {
+    gridSize = 5;
+  }
 
   gridContainer.style.setProperty('--square-size', gridSize);
 
   for (let i = 0; i < gridSize * gridSize; i++) {
-    const gridDiv = document.createElement('div');
-
-    gridDiv.classList.add('etch-a-sketch-square');
-
-    gridContainer.appendChild(gridDiv);
-  }
-}
-
-function createUserNewGrid(userGridInput) {
-  gridContainer.style.setProperty('--square-size', userGridInput);
-
-  for (let i = 0; i < userGridInput * userGridInput; i++) {
     const gridDiv = document.createElement('div');
 
     gridDiv.classList.add('etch-a-sketch-square');
