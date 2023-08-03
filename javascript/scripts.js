@@ -1,9 +1,7 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable prefer-const */
 const gridContainer = document.querySelector('.grid-square-container');
 const changeGridSizeBtn = document.querySelector('.change-grid-size-btn');
 const gridResetBtn = document.querySelector('.reset-grid');
-const opacityBtn = document.querySelector('.opacity-toggle');
+const opacityToggleBtn = document.querySelector('.opacity-toggle-btn');
 const customGridColor = document.querySelector('.custom-grid-color');
 const userSelectedOpacity = document.querySelector('.user-selected-opacity');
 const opacitySlider = document.querySelector('.opacity-slider');
@@ -21,7 +19,7 @@ fillEtchASketchSquareTouch();
 getSelectedColor();
 
 changeGridSizeBtn.addEventListener('click', () => {
-  let userGridSizeChoice = parseInt(
+  const userGridSizeChoice = parseInt(
     prompt('Please pick a number between 2 and 100'),
     10
   );
@@ -51,13 +49,15 @@ gridResetBtn.addEventListener('click', () => {
 });
 
 function createEtchASketchGrid(gridSize) {
+  let newGridSize = gridSize;
+
   if (!gridSize) {
-    gridSize = 5;
+    newGridSize = 5;
   }
 
-  gridContainer.style.setProperty('--square-size', gridSize);
+  gridContainer.style.setProperty('--square-size', newGridSize);
 
-  for (let i = 0; i < gridSize * gridSize; i++) {
+  for (let i = 0; i < newGridSize * newGridSize; i++) {
     const gridDiv = document.createElement('div');
 
     gridDiv.classList.add('etch-a-sketch-square');
@@ -76,7 +76,7 @@ function fillEtchASketchSquare() {
       opacity = 0.1;
     }
 
-    let storedColor = userSelectedColor;
+    const storedColor = userSelectedColor;
 
     if (storedColor !== userSelectedColor && opacity === 'opacity on') {
       opacity = 0.1;
@@ -177,17 +177,17 @@ function touchEnd() {
 }
 
 function getRandomNumber() {
-  let randomNumber = Math.floor(Math.random() * 256);
+  const randomNumber = Math.floor(Math.random() * 256);
   return randomNumber;
 }
 
 function getRandomColorWithOpacity(opacity) {
-  let rainbow = `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()}, ${opacity})`;
+  const rainbow = `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()}, ${opacity})`;
   return rainbow;
 }
 
 function getSelectedColor() {
-  let selectedColor = document.querySelectorAll('.colors');
+  const selectedColor = document.querySelectorAll('.colors');
   selectedColor.forEach((color) => {
     color.addEventListener('click', () => {
       if (color.classList[0] === 'red') {
@@ -323,7 +323,7 @@ getCustomOpacity();
 
 function resetGrid() {
   etchASketchSquare.forEach((square) => {
-    let blankSquare = square;
+    const blankSquare = square;
 
     blankSquare.style.backgroundColor = `rgb(${255}, ${255}, ${255})`;
 
@@ -332,8 +332,8 @@ function resetGrid() {
 }
 
 function toggleOpacity() {
-  opacityBtn.addEventListener('click', () => {
-    let opacitySelection = document.querySelector('.opacity-display');
+  opacityToggleBtn.addEventListener('click', () => {
+    const opacitySelection = document.querySelector('.opacity-display');
 
     if (opacitySelection.textContent === 'Opacity off') {
       opacitySelection.textContent = 'Opacity on';
