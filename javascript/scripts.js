@@ -6,9 +6,9 @@ const customGridColor = document.querySelector('.custom-grid-color');
 const userSelectedOpacity = document.querySelector('.user-selected-opacity');
 const opacitySlider = document.querySelector('.opacity-slider');
 const customOpacityDisplay = document.querySelector('.custom-opacity-display');
+
 let userSelectedColor;
-let currentOpacity = 'opacity off';
-customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${0}, ${0})`;
+let opacityToggle = 'opacity off';
 
 createEtchASketchGrid();
 
@@ -53,6 +53,10 @@ function createEtchASketchGrid(gridSize) {
 
   if (!gridSize) {
     newGridSize = 5;
+
+    customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${0}, ${0}, ${
+      opacitySlider.value
+    })`;
   }
 
   gridContainer.style.setProperty('--square-size', newGridSize);
@@ -70,9 +74,9 @@ function fillEtchASketchSquare() {
   etchASketchSquare.forEach((square) => {
     let opacity;
 
-    if (currentOpacity === 'opacity off') {
+    if (opacityToggle === 'opacity off') {
       opacity = opacitySlider.value;
-    } else if (currentOpacity === 'opacity on') {
+    } else if (opacityToggle === 'opacity on') {
       opacity = 0.1;
     }
 
@@ -111,19 +115,19 @@ function touchStart(e) {
   previousSquare = e.target;
   mySquare = e.target;
 
-  if (!opacityMap.has(previousSquare) && currentOpacity === 'opacity on') {
+  if (!opacityMap.has(previousSquare) && opacityToggle === 'opacity on') {
     opacityMap.set(previousSquare, 0.1);
   }
 
-  if (currentOpacity === 'opacity off') {
+  if (opacityToggle === 'opacity off') {
     touchOpacity = opacitySlider.value;
-  } else if (currentOpacity === 'opacity on') {
+  } else if (opacityToggle === 'opacity on') {
     touchOpacity = opacityMap.get(previousSquare);
   }
 
   applySelectedColor(e.target, userSelectedColor, touchOpacity);
 
-  if (opacityMap.get(previousSquare) < 1 && currentOpacity === 'opacity on') {
+  if (opacityMap.get(previousSquare) < 1 && opacityToggle === 'opacity on') {
     opacityMap.set(previousSquare, opacityMap.get(previousSquare) + 0.1);
   }
 }
@@ -138,13 +142,13 @@ function touchMove(e) {
 
   previousSquare = touchedSquare;
 
-  if (!opacityMap.has(previousSquare) && currentOpacity === 'opacity on') {
+  if (!opacityMap.has(previousSquare) && opacityToggle === 'opacity on') {
     opacityMap.set(previousSquare, 0.1);
   }
 
-  if (currentOpacity === 'opacity off') {
+  if (opacityToggle === 'opacity off') {
     touchOpacity = opacitySlider.value;
-  } else if (currentOpacity === 'opacity on') {
+  } else if (opacityToggle === 'opacity on') {
     touchOpacity = opacityMap.get(previousSquare);
   }
 
@@ -159,7 +163,7 @@ function touchMove(e) {
 
       if (
         opacityMap.get(previousSquare) < 1 &&
-        currentOpacity === 'opacity on'
+        opacityToggle === 'opacity on'
       ) {
         opacityMap.set(previousSquare, opacityMap.get(previousSquare) + 0.1);
       }
@@ -193,35 +197,51 @@ function getSelectedColor() {
       if (color.classList[0] === 'red') {
         userSelectedColor = 'red';
 
-        customOpacityDisplay.style.backgroundColor = `rgb(${255}, ${0}, ${0})`;
+        customOpacityDisplay.style.backgroundColor = `rgb(${255}, ${0}, ${0}, ${
+          opacitySlider.value
+        })`;
       } else if (color.classList[0] === 'orange') {
         userSelectedColor = 'orange';
 
-        customOpacityDisplay.style.backgroundColor = `rgb(${255}, ${165}, ${0})`;
+        customOpacityDisplay.style.backgroundColor = `rgb(${255}, ${165}, ${0}, ${
+          opacitySlider.value
+        })`;
       } else if (color.classList[0] === 'yellow') {
         userSelectedColor = 'yellow';
 
-        customOpacityDisplay.style.backgroundColor = `rgb(${255}, ${255}, ${0})`;
+        customOpacityDisplay.style.backgroundColor = `rgb(${255}, ${255}, ${0}, ${
+          opacitySlider.value
+        })`;
       } else if (color.classList[0] === 'green') {
         userSelectedColor = 'green';
 
-        customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${128}, ${0})`;
+        customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${128}, ${0}, ${
+          opacitySlider.value
+        })`;
       } else if (color.classList[0] === 'blue') {
         userSelectedColor = 'blue';
 
-        customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${0}, ${255})`;
+        customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${0}, ${255}, ${
+          opacitySlider.value
+        })`;
       } else if (color.classList[0] === 'purple') {
         userSelectedColor = 'purple';
 
-        customOpacityDisplay.style.backgroundColor = `rgb(${128}, ${0}, ${128})`;
+        customOpacityDisplay.style.backgroundColor = `rgb(${128}, ${0}, ${128}, ${
+          opacitySlider.value
+        })`;
       } else if (color.classList[0] === 'black') {
         userSelectedColor = 'black';
 
-        customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${0}, ${0})`;
+        customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${0}, ${0}, ${
+          opacitySlider.value
+        })`;
       } else if (color.classList[0] === 'white') {
         userSelectedColor = 'white';
 
-        customOpacityDisplay.style.backgroundColor = `rgb(${255}, ${255}, ${255})`;
+        customOpacityDisplay.style.backgroundColor = `rgb(${255}, ${255}, ${255}, ${
+          opacitySlider.value
+        })`;
       } else if (color.classList[0] === 'rainbow') {
         userSelectedColor = 'rainbow';
       }
@@ -260,6 +280,11 @@ function getSelectedColorAndOpacity(squareOpacity) {
   }
   if (userSelectedColor === 'rainbow') {
     return 'rainbow';
+  }
+  if (squareOpacity) {
+    customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${0}, ${0}, ${
+      opacitySlider.value
+    })`;
   }
 }
 
@@ -337,10 +362,10 @@ function toggleOpacity() {
 
     if (opacitySelection.textContent === 'Opacity off') {
       opacitySelection.textContent = 'Opacity on';
-      currentOpacity = 'opacity on';
+      opacityToggle = 'opacity on';
     } else {
       opacitySelection.textContent = 'Opacity off';
-      currentOpacity = 'opacity off';
+      opacityToggle = 'opacity off';
     }
 
     opacityMap.clear();
