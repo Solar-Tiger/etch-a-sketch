@@ -7,9 +7,11 @@ const customGridColor = document.querySelector('.custom-grid-color');
 const userSelectedOpacity = document.querySelector('.user-selected-opacity');
 const opacitySlider = document.querySelector('.opacity-slider');
 const customOpacityDisplay = document.querySelector('.custom-opacity-display');
+const toggleGridBordersBtn = document.querySelector('.toggle-borders-btn');
 
 let userSelectedColor;
 let opacityToggle = 'opacity off';
+let gridBordersToggle = 'grids on';
 
 createEtchASketchGrid();
 
@@ -393,3 +395,27 @@ function toggleOpacity() {
 }
 
 toggleOpacity();
+
+function toggleGridBorders() {
+  toggleGridBordersBtn.addEventListener('click', () => {
+    if (gridBordersToggle === 'grids on') {
+      etchASketchSquare.forEach((square) => {
+        square.classList.add('etch-a-sketch-square-no-border');
+      });
+
+      console.log('off');
+
+      gridBordersToggle = 'grids off';
+    } else if (gridBordersToggle === 'grids off') {
+      etchASketchSquare.forEach((square) => {
+        square.classList.remove('etch-a-sketch-square-no-border');
+      });
+
+      console.log('on');
+
+      gridBordersToggle = 'grids on';
+    }
+  });
+}
+
+toggleGridBorders();

@@ -17,7 +17,8 @@
 
 .change-grid-size-btn,
 .reset-grid,
-.opacity-toggle-btn {
+.opacity-toggle-btn,
+.toggle-borders-btn {
   margin: 10px 10px;
   padding: 5px 20px;
 }
@@ -35,6 +36,10 @@
   width: calc(100% / var(--square-size));
   height: calc(100% / var(--square-size));
   border: 1px solid black;
+}
+
+.etch-a-sketch-square-no-border {
+  border: none;
 }
 
 .colors-container {
@@ -101,7 +106,8 @@
   .change-grid-size-btn,
   .reset-grid,
   .opacity-display,
-  .opacity-toggle {
+  .opacity-toggle-btn,
+  .toggle-borders-btn {
     font-size: 16px;
   }
 
@@ -120,7 +126,8 @@
   .change-grid-size-btn,
   .reset-grid,
   .opacity-display,
-  .opacity-toggle {
+  .opacity-toggle-btn,
+  .toggle-borders-btn {
     font-size: 30px;
   }
 
@@ -139,7 +146,8 @@
   .change-grid-size-btn,
   .reset-grid,
   .opacity-display,
-  .opacity-toggle {
+  .opacity-toggle-btn,
+  .toggle-borders-btn {
     font-size: 45px;
   }
 
