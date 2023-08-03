@@ -260,6 +260,10 @@ function getSelectedColor() {
         customOpacityDisplay.style.background = rainbowBackground;
       }
 
+      if (userCustomGridColor !== null) {
+        userCustomGridColor = null;
+      }
+
       opacityMap.clear();
       fillEtchASketchSquare();
       fillEtchASketchSquareTouch();
@@ -302,7 +306,7 @@ function getSelectedColorAndOpacity(squareOpacity) {
   }
 }
 
-let userCustomGridColor;
+let userCustomGridColor = null;
 
 customGridColor.addEventListener('input', () => {
   userCustomGridColor = customGridColor.value;
@@ -346,7 +350,7 @@ function getCustomOpacity() {
   opacitySlider.addEventListener('input', () => {
     userSelectedOpacity.textContent = opacitySlider.value;
 
-    if (userCustomGridColor) {
+    if (userCustomGridColor !== null) {
       customOpacityDisplay.style.backgroundColor = getCustomGridColor(
         opacitySlider.value
       );
