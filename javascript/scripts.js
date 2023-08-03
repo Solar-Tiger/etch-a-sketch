@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 const gridContainer = document.querySelector('.grid-square-container');
 const changeGridSizeBtn = document.querySelector('.change-grid-size-btn');
 const gridResetBtn = document.querySelector('.reset-grid');
@@ -53,6 +54,8 @@ function createEtchASketchGrid(gridSize) {
 
   if (!gridSize) {
     newGridSize = 5;
+
+    userSelectedColor = 'black';
 
     customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${0}, ${0}, ${
       opacitySlider.value
@@ -197,53 +200,64 @@ function getSelectedColor() {
       if (color.classList[0] === 'red') {
         userSelectedColor = 'red';
 
-        customOpacityDisplay.style.backgroundColor = `rgb(${255}, ${0}, ${0}, ${
+        customOpacityDisplay.style.backgroundColor = `rgba(${255}, ${0}, ${0}, ${
           opacitySlider.value
         })`;
       } else if (color.classList[0] === 'orange') {
         userSelectedColor = 'orange';
 
-        customOpacityDisplay.style.backgroundColor = `rgb(${255}, ${165}, ${0}, ${
+        customOpacityDisplay.style.backgroundColor = `rgba(${255}, ${165}, ${0}, ${
           opacitySlider.value
         })`;
       } else if (color.classList[0] === 'yellow') {
         userSelectedColor = 'yellow';
 
-        customOpacityDisplay.style.backgroundColor = `rgb(${255}, ${255}, ${0}, ${
+        customOpacityDisplay.style.backgroundColor = `rgba(${255}, ${255}, ${0}, ${
           opacitySlider.value
         })`;
       } else if (color.classList[0] === 'green') {
         userSelectedColor = 'green';
 
-        customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${128}, ${0}, ${
+        customOpacityDisplay.style.backgroundColor = `rgba(${0}, ${128}, ${0}, ${
           opacitySlider.value
         })`;
       } else if (color.classList[0] === 'blue') {
         userSelectedColor = 'blue';
 
-        customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${0}, ${255}, ${
+        customOpacityDisplay.style.backgroundColor = `rgba(${0}, ${0}, ${255}, ${
           opacitySlider.value
         })`;
       } else if (color.classList[0] === 'purple') {
         userSelectedColor = 'purple';
 
-        customOpacityDisplay.style.backgroundColor = `rgb(${128}, ${0}, ${128}, ${
+        customOpacityDisplay.style.backgroundColor = `rgba(${128}, ${0}, ${128}, ${
           opacitySlider.value
         })`;
       } else if (color.classList[0] === 'black') {
         userSelectedColor = 'black';
 
-        customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${0}, ${0}, ${
+        customOpacityDisplay.style.backgroundColor = `rgba(${0}, ${0}, ${0}, ${
           opacitySlider.value
         })`;
       } else if (color.classList[0] === 'white') {
         userSelectedColor = 'white';
 
-        customOpacityDisplay.style.backgroundColor = `rgb(${255}, ${255}, ${255}, ${
+        customOpacityDisplay.style.backgroundColor = `rgba(${255}, ${255}, ${255}, ${
           opacitySlider.value
         })`;
       } else if (color.classList[0] === 'rainbow') {
         userSelectedColor = 'rainbow';
+
+        let colorRed = `rgba(255, 0, 0, ${opacitySlider.value})`;
+        let colorOrange = `rgba(255, 165, 0, ${opacitySlider.value})`;
+        let colorYellow = `rgba(255, 255, 0, ${opacitySlider.value})`;
+        let colorGreen = `rgba(0, 128, 0, ${opacitySlider.value})`;
+        let colorBlue = `rgba(0, 0, 255, ${opacitySlider.value})`;
+        let colorPurple = `rgba(128, 0, 128, ${opacitySlider.value})`;
+
+        let rainbowBackground = `linear-gradient(to top right, ${colorRed}, ${colorOrange}, ${colorYellow}, ${colorGreen}, ${colorBlue}, ${colorPurple})`;
+
+        customOpacityDisplay.style.background = rainbowBackground;
       }
 
       opacityMap.clear();
