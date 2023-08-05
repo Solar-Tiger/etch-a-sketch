@@ -401,15 +401,11 @@ function toggleGridBorders() {
         square.classList.add('etch-a-sketch-square-no-border');
       });
 
-      console.log('off');
-
       gridBordersToggle = 'grids off';
     } else if (gridBordersToggle === 'grids off') {
       etchASketchSquare.forEach((square) => {
         square.classList.remove('etch-a-sketch-square-no-border');
       });
-
-      console.log('on');
 
       gridBordersToggle = 'grids on';
     }
