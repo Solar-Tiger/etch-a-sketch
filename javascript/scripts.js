@@ -262,8 +262,6 @@ function getSelectedColor() {
         customOpacityDisplay.style.background = rainbowBackground;
       }
 
-      console.log(userSelectedColor, customOpacityDisplay.style.background);
-
       if (userCustomGridColor !== null) {
         userCustomGridColor = null;
       }
