@@ -39,9 +39,6 @@ changeGridSizeBtn.addEventListener('click', () => {
 
     fillEtchASketchSquare();
     fillEtchASketchSquareTouch();
-  } else {
-    alert('Incorrect, try again');
-    return 0;
   }
 });
 
@@ -248,18 +245,7 @@ function getSelectedColor() {
           opacitySlider.value
         })`;
       } else if (color.classList[0] === 'rainbow') {
-        userSelectedColor = 'rainbow';
-
-        let colorRed = `rgba(255, 0, 0, ${opacitySlider.value})`;
-        let colorOrange = `rgba(255, 165, 0, ${opacitySlider.value})`;
-        let colorYellow = `rgba(255, 255, 0, ${opacitySlider.value})`;
-        let colorGreen = `rgba(0, 128, 0, ${opacitySlider.value})`;
-        let colorBlue = `rgba(0, 0, 255, ${opacitySlider.value})`;
-        let colorPurple = `rgba(128, 0, 128, ${opacitySlider.value})`;
-
-        let rainbowBackground = `linear-gradient(to top right, ${colorRed}, ${colorOrange}, ${colorYellow}, ${colorGreen}, ${colorBlue}, ${colorPurple})`;
-
-        customOpacityDisplay.style.background = rainbowBackground;
+        rainbowBackgroundDisplay();
       }
 
       if (userCustomGridColor !== null) {
@@ -299,12 +285,9 @@ function getSelectedColorAndOpacity(squareOpacity) {
     return `rgb(${255}, ${255}, ${255}, ${squareOpacity})`;
   }
   if (userSelectedColor === 'rainbow') {
+    rainbowBackgroundDisplay();
+
     return 'rainbow';
-  }
-  if (squareOpacity) {
-    customOpacityDisplay.style.background = `rgb(${0}, ${0}, ${0}, ${
-      opacitySlider.value
-    })`;
   }
 }
 
@@ -368,7 +351,7 @@ function resetGrid() {
   etchASketchSquare.forEach((square) => {
     const blankSquare = square;
 
-    blankSquare.style.background = `rgb(${255}, ${255}, ${255})`;
+    blankSquare.removeAttribute('style');
 
     opacityMap.clear();
   });
@@ -413,3 +396,18 @@ function toggleGridBorders() {
 }
 
 toggleGridBorders();
+
+function rainbowBackgroundDisplay() {
+  userSelectedColor = 'rainbow';
+
+  let colorRed = `rgba(255, 0, 0, ${opacitySlider.value})`;
+  let colorOrange = `rgba(255, 165, 0, ${opacitySlider.value})`;
+  let colorYellow = `rgba(255, 255, 0, ${opacitySlider.value})`;
+  let colorGreen = `rgba(0, 128, 0, ${opacitySlider.value})`;
+  let colorBlue = `rgba(0, 0, 255, ${opacitySlider.value})`;
+  let colorPurple = `rgba(128, 0, 128, ${opacitySlider.value})`;
+
+  let rainbowBackground = `linear-gradient(to top right, ${colorRed}, ${colorOrange}, ${colorYellow}, ${colorGreen}, ${colorBlue}, ${colorPurple})`;
+
+  customOpacityDisplay.style.background = rainbowBackground;
+}
