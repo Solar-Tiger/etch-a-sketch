@@ -59,7 +59,7 @@ function createEtchASketchGrid(gridSize) {
 
     userSelectedColor = 'black';
 
-    customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${0}, ${0}, ${
+    customOpacityDisplay.style.background = `rgb(${0}, ${0}, ${0}, ${
       opacitySlider.value
     })`;
   }
@@ -202,49 +202,49 @@ function getSelectedColor() {
       if (color.classList[0] === 'red') {
         userSelectedColor = 'red';
 
-        customOpacityDisplay.style.backgroundColor = `rgba(${255}, ${0}, ${0}, ${
+        customOpacityDisplay.style.background = `rgba(${255}, ${0}, ${0}, ${
           opacitySlider.value
         })`;
       } else if (color.classList[0] === 'orange') {
         userSelectedColor = 'orange';
 
-        customOpacityDisplay.style.backgroundColor = `rgba(${255}, ${165}, ${0}, ${
+        customOpacityDisplay.style.background = `rgba(${255}, ${165}, ${0}, ${
           opacitySlider.value
         })`;
       } else if (color.classList[0] === 'yellow') {
         userSelectedColor = 'yellow';
 
-        customOpacityDisplay.style.backgroundColor = `rgba(${255}, ${255}, ${0}, ${
+        customOpacityDisplay.style.background = `rgba(${255}, ${255}, ${0}, ${
           opacitySlider.value
         })`;
       } else if (color.classList[0] === 'green') {
         userSelectedColor = 'green';
 
-        customOpacityDisplay.style.backgroundColor = `rgba(${0}, ${128}, ${0}, ${
+        customOpacityDisplay.style.background = `rgba(${0}, ${128}, ${0}, ${
           opacitySlider.value
         })`;
       } else if (color.classList[0] === 'blue') {
         userSelectedColor = 'blue';
 
-        customOpacityDisplay.style.backgroundColor = `rgba(${0}, ${0}, ${255}, ${
+        customOpacityDisplay.style.background = `rgba(${0}, ${0}, ${255}, ${
           opacitySlider.value
         })`;
       } else if (color.classList[0] === 'purple') {
         userSelectedColor = 'purple';
 
-        customOpacityDisplay.style.backgroundColor = `rgba(${128}, ${0}, ${128}, ${
+        customOpacityDisplay.style.background = `rgba(${128}, ${0}, ${128}, ${
           opacitySlider.value
         })`;
       } else if (color.classList[0] === 'black') {
         userSelectedColor = 'black';
 
-        customOpacityDisplay.style.backgroundColor = `rgba(${0}, ${0}, ${0}, ${
+        customOpacityDisplay.style.background = `rgba(${0}, ${0}, ${0}, ${
           opacitySlider.value
         })`;
       } else if (color.classList[0] === 'white') {
         userSelectedColor = 'white';
 
-        customOpacityDisplay.style.backgroundColor = `rgba(${255}, ${255}, ${255}, ${
+        customOpacityDisplay.style.background = `rgba(${255}, ${255}, ${255}, ${
           opacitySlider.value
         })`;
       } else if (color.classList[0] === 'rainbow') {
@@ -261,6 +261,8 @@ function getSelectedColor() {
 
         customOpacityDisplay.style.background = rainbowBackground;
       }
+
+      console.log(userSelectedColor, customOpacityDisplay.style.background);
 
       if (userCustomGridColor !== null) {
         userCustomGridColor = null;
@@ -302,7 +304,7 @@ function getSelectedColorAndOpacity(squareOpacity) {
     return 'rainbow';
   }
   if (squareOpacity) {
-    customOpacityDisplay.style.backgroundColor = `rgb(${0}, ${0}, ${0}, ${
+    customOpacityDisplay.style.background = `rgb(${0}, ${0}, ${0}, ${
       opacitySlider.value
     })`;
   }
@@ -313,7 +315,7 @@ let userCustomGridColor = null;
 customGridColor.addEventListener('input', () => {
   userCustomGridColor = customGridColor.value;
 
-  customOpacityDisplay.style.backgroundColor = customGridColor.value;
+  customOpacityDisplay.style.background = customGridColor.value;
 });
 
 customGridColor.addEventListener('change', () => {
@@ -338,13 +340,11 @@ function applySelectedColor(
   currentOpacity
 ) {
   if (currentlySelectedColor === 'rainbow') {
-    targetSquare.style.backgroundColor =
-      getRandomColorWithOpacity(currentOpacity);
+    targetSquare.style.background = getRandomColorWithOpacity(currentOpacity);
   } else if (currentlySelectedColor === 'custom grid color') {
-    targetSquare.style.backgroundColor = getCustomGridColor(currentOpacity);
+    targetSquare.style.background = getCustomGridColor(currentOpacity);
   } else {
-    targetSquare.style.backgroundColor =
-      getSelectedColorAndOpacity(currentOpacity);
+    targetSquare.style.background = getSelectedColorAndOpacity(currentOpacity);
   }
 }
 
@@ -353,11 +353,11 @@ function getCustomOpacity() {
     userSelectedOpacity.textContent = opacitySlider.value;
 
     if (userCustomGridColor !== null) {
-      customOpacityDisplay.style.backgroundColor = getCustomGridColor(
+      customOpacityDisplay.style.background = getCustomGridColor(
         opacitySlider.value
       );
     } else {
-      customOpacityDisplay.style.backgroundColor = getSelectedColorAndOpacity(
+      customOpacityDisplay.style.background = getSelectedColorAndOpacity(
         opacitySlider.value
       );
     }
@@ -370,7 +370,7 @@ function resetGrid() {
   etchASketchSquare.forEach((square) => {
     const blankSquare = square;
 
-    blankSquare.style.backgroundColor = `rgb(${255}, ${255}, ${255})`;
+    blankSquare.style.background = `rgb(${255}, ${255}, ${255})`;
 
     opacityMap.clear();
   });
