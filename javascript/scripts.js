@@ -339,6 +339,8 @@ function getSelectedColorAndOpacity(squareOpacity) {
 
 let userCustomGridColor = null;
 
+// THIS EVENT LISTENER CONSTANTLY DISPLAYS WHAT'S IN THE DISPLAY AS THE USER PICKS A COLOR FROM THE "INPUT TYPE COLOR" FIELD
+
 customGridColor.addEventListener('input', () => {
   userCustomGridColor = customGridColor.value;
 
@@ -353,6 +355,8 @@ customGridColor.addEventListener('change', () => {
   fillEtchASketchSquareTouch();
 });
 
+// THIS FUNCTION ALLOWS USE TO TRANSLATE THE INPUT OF HEX TO RGBA AND RETURN THAT RESULT
+
 function getCustomGridColor(newSquareOpacity) {
   const r = parseInt(userCustomGridColor.slice(1, 3), 16);
   const g = parseInt(userCustomGridColor.slice(3, 5), 16);
@@ -360,6 +364,10 @@ function getCustomGridColor(newSquareOpacity) {
 
   return `rgb(${r}, ${g}, ${b}, ${newSquareOpacity})`;
 }
+
+// ---------------------------------------------------------------------------
+//         COMBINE ALL ABOVE RESULTS TO CHANGE THE GRID SQUARES COLORS
+// ---------------------------------------------------------------------------
 
 function applySelectedColor(
   targetSquare,
@@ -374,6 +382,8 @@ function applySelectedColor(
     targetSquare.style.background = getSelectedColorAndOpacity(currentOpacity);
   }
 }
+
+// THIS FUNCTION IS USED TO NOT ONLY UPDATE THE OPACITY SLIDER VALUE IN THE SELECTED COLOR DISPLAY, BUT ALSO FOR THE COLOR IN EACH GRID SQUARE
 
 function getCustomOpacity() {
   opacitySlider.addEventListener('input', () => {
@@ -405,13 +415,11 @@ function clearGrid() {
 
 function toggleOpacity() {
   opacityToggleBtn.addEventListener('click', () => {
-    const opacitySelection = document.querySelector('.opacity-display');
-
-    if (opacitySelection.textContent === 'Opacity off') {
-      opacitySelection.textContent = 'Opacity on';
+    if (opacityToggleBtn.textContent === 'Opacity off') {
+      opacityToggleBtn.textContent = 'Opacity on';
       opacityToggle = 'opacity on';
     } else {
-      opacitySelection.textContent = 'Opacity off';
+      opacityToggleBtn.textContent = 'Opacity off';
       opacityToggle = 'opacity off';
     }
 
