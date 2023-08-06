@@ -1,7 +1,14 @@
 /* eslint-disable prefer-const */
+
+// ---------------------------------------------------------------------------
+//                             ETCH-A-SKETCH LOGIC
+// ---------------------------------------------------------------------------
+
+// VARIOUS DEFAULT VARIABLES TO RUN ETCH-A-SKETCH LOGIC
+
 const gridContainer = document.querySelector('.grid-square-container');
 const changeGridSizeBtn = document.querySelector('.change-grid-size-btn');
-const gridResetBtn = document.querySelector('.reset-grid');
+const clearGridBtn = document.querySelector('.clear-grid');
 const opacityToggleBtn = document.querySelector('.opacity-toggle-btn');
 const customGridColor = document.querySelector('.custom-grid-color');
 const userSelectedOpacity = document.querySelector('.user-selected-opacity');
@@ -9,15 +16,19 @@ const opacitySlider = document.querySelector('.opacity-slider');
 const customOpacityDisplay = document.querySelector('.custom-opacity-display');
 const toggleGridBordersBtn = document.querySelector('.toggle-borders-btn');
 
+// VARIABLES USED TO CONTROL CURRENT SELECTED COLOR, IF OPACITY GOES FROM 0.1 TO 1 AND SHOW OR HIDE THE GRID SQUARES
+
 let userSelectedColor;
 let opacityToggle = 'opacity off';
 let gridBordersToggle = 'grids on';
+
+// CREATE THE ETCH-A-SKECTH GRID AND ALLOW MOUSE MOVEMENT WHEN HOVERED OVER A SQUARE OR TOUCH INPUT ON EACH SQUARE FROM USER ON MOBILE DEVICE
 
 createEtchASketchGrid();
 
 let etchASketchSquare = document.querySelectorAll('.etch-a-sketch-square');
 
-fillEtchASketchSquare();
+fillEtchASketchSquareMouse();
 fillEtchASketchSquareTouch();
 getSelectedColor();
 
@@ -27,6 +38,8 @@ changeGridSizeBtn.addEventListener('click', () => {
     10
   );
   if (userGridSizeChoice >= 2 && userGridSizeChoice <= 100) {
+    // THIS ANSWER WAS FOUND ON STACK OVERFLOW FOR REMOVING THE GRID SQUARES BEFORE APPLYING NEW ONES
+
     while (gridContainer.lastElementChild) {
       gridContainer.removeChild(gridContainer.lastElementChild);
     }
@@ -37,19 +50,19 @@ changeGridSizeBtn.addEventListener('click', () => {
 
     opacityMap.clear();
 
-    fillEtchASketchSquare();
+    fillEtchASketchSquareMouse();
     fillEtchASketchSquareTouch();
   }
 });
 
-gridResetBtn.addEventListener('click', () => {
-  resetGrid();
-  fillEtchASketchSquare();
-  fillEtchASketchSquareTouch();
+clearGridBtn.addEventListener('click', () => {
+  clearGrid();
 });
 
 function createEtchASketchGrid(gridSize) {
   let newGridSize = gridSize;
+
+  // IF STATEMENT TO DETERMINE DEFAULT SETTINGS ON PAGE LOAD FOR GRID SIZE, CURRENT SELECTED COLOR AND CURRENT DISPLAYED COLOR
 
   if (!gridSize) {
     newGridSize = 5;
@@ -72,7 +85,13 @@ function createEtchASketchGrid(gridSize) {
   }
 }
 
-function fillEtchASketchSquare() {
+// ---------------------------------------------------------------------------
+//                 ETCH-A-SKETCH FOR FILLING IN THE SQUARES
+// ---------------------------------------------------------------------------
+
+// FUNCTION FOR FILLING IN THE SQUARES WITH A MOUSE
+
+function fillEtchASketchSquareMouse() {
   etchASketchSquare.forEach((square) => {
     let opacity;
 
@@ -100,6 +119,8 @@ function fillEtchASketchSquare() {
   });
 }
 
+// FUNCTION WITH EVENT LISTENER FOR FILLING IN THE SQUARES WITH TOUCH STATE, TOUCH MOVE AND TOUCH END
+
 function fillEtchASketchSquareTouch() {
   etchASketchSquare.forEach((square) => {
     square.addEventListener('touchstart', touchStart);
@@ -107,6 +128,8 @@ function fillEtchASketchSquareTouch() {
     square.addEventListener('touchend', touchEnd);
   });
 }
+
+// VARIABLES FOR CONTROLLING HOW EACH SQUARE REACTS ALONG WITH A MAP FOR STORING EACH SQUARES OPACITY
 
 let previousSquare;
 let mySquare = null;
@@ -133,6 +156,8 @@ function touchStart(e) {
     opacityMap.set(previousSquare, opacityMap.get(previousSquare) + 0.1);
   }
 }
+
+// A LOT OF THE "touchMove(e)" FUNCTION COMES FROM CHATGPT (WITH MY MODIFICATIONS) AND MDN
 
 function touchMove(e) {
   e.preventDefault();
@@ -182,18 +207,27 @@ function touchEnd() {
   });
 }
 
-function getRandomNumber() {
-  const randomNumber = Math.floor(Math.random() * 256);
-  return randomNumber;
-}
+// ---------------------------------------------------------------------------
+//                     GET RANDOM COLOR FOR RAINBOW
+// ---------------------------------------------------------------------------
 
 function getRandomColorWithOpacity(opacity) {
-  const rainbow = `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()}, ${opacity})`;
+  let randomNumberOne = Math.floor(Math.random() * 256);
+  let randomNumberTwo = Math.floor(Math.random() * 256);
+  let randomNumberThree = Math.floor(Math.random() * 256);
+
+  const rainbow = `rgb(${randomNumberOne}, ${randomNumberTwo}, ${randomNumberThree}, ${opacity})`;
+
   return rainbow;
 }
 
+// ---------------------------------------------------------------------------
+//                         GET USER SELECTED COLOR
+// ---------------------------------------------------------------------------
+
 function getSelectedColor() {
   const selectedColor = document.querySelectorAll('.colors');
+
   selectedColor.forEach((color) => {
     color.addEventListener('click', () => {
       if (color.classList[0] === 'red') {
@@ -248,16 +282,20 @@ function getSelectedColor() {
         rainbowBackgroundDisplay();
       }
 
+      // SETS CUSTOM GRID COLOR TO NULL AGAIN (IF IT ISN'T ALREADY NULL) SO "applySelectedColor()" RUNS CORRECTLY
+
       if (userCustomGridColor !== null) {
         userCustomGridColor = null;
       }
 
       opacityMap.clear();
-      fillEtchASketchSquare();
-      fillEtchASketchSquareTouch();
     });
   });
 }
+
+// ---------------------------------------------------------------------------
+//                    GET USER SELECTED COLOR AND OPACITY
+// ---------------------------------------------------------------------------
 
 function getSelectedColorAndOpacity(squareOpacity) {
   if (userSelectedColor === 'red') {
@@ -285,11 +323,19 @@ function getSelectedColorAndOpacity(squareOpacity) {
     return `rgb(${255}, ${255}, ${255}, ${squareOpacity})`;
   }
   if (userSelectedColor === 'rainbow') {
+    // THIS FUNCTIO EXIST TO UPDATE THE OPACITY FOR RAINBOW IF SELECTED. UNSURE IF IT'S THE CORRECT WAY TO DO IT THIS WAY OR NOT
+
     rainbowBackgroundDisplay();
 
     return 'rainbow';
   }
 }
+
+// ---------------------------------------------------------------------------
+//                          GET USER CUSTOM COLOR
+// ---------------------------------------------------------------------------
+
+// THE VARIABLE "userCustomGridColor" CONTROLS HOW THE FUNCTION "getCustomOpacity()" RUNS
 
 let userCustomGridColor = null;
 
@@ -303,7 +349,7 @@ customGridColor.addEventListener('change', () => {
   userSelectedColor = 'custom grid color';
 
   opacityMap.clear();
-  fillEtchASketchSquare();
+  fillEtchASketchSquareMouse();
   fillEtchASketchSquareTouch();
 });
 
@@ -347,7 +393,7 @@ function getCustomOpacity() {
 
 getCustomOpacity();
 
-function resetGrid() {
+function clearGrid() {
   etchASketchSquare.forEach((square) => {
     const blankSquare = square;
 
@@ -370,7 +416,7 @@ function toggleOpacity() {
     }
 
     opacityMap.clear();
-    fillEtchASketchSquare();
+    fillEtchASketchSquareMouse();
     fillEtchASketchSquareTouch();
   });
 }
