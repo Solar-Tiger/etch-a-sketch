@@ -431,7 +431,7 @@ function toggleOpacity() {
 
 toggleOpacity();
 
-function toggleGridBorders() {
+function toggleGridBordersDisplay() {
   toggleGridBordersBtn.addEventListener('click', () => {
     if (gridBordersToggle === 'grids on') {
       etchASketchSquare.forEach((square) => {
@@ -449,7 +449,7 @@ function toggleGridBorders() {
   });
 }
 
-toggleGridBorders();
+toggleGridBordersDisplay();
 
 function rainbowBackgroundDisplay() {
   userSelectedColor = 'rainbow';
