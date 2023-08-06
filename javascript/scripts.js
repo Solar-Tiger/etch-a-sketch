@@ -16,13 +16,13 @@ const opacitySlider = document.querySelector('.opacity-slider');
 const customOpacityDisplay = document.querySelector('.custom-opacity-display');
 const toggleGridBordersBtn = document.querySelector('.toggle-borders-btn');
 
-// VARIABLES USED TO CONTROL CURRENT SELECTED COLOR, IF OPACITY GOES FROM 0.1 TO 1 AND SHOW OR HIDE THE GRID SQUARES
+// VARIABLES USED TO CONTROL CURRENT SELECTED COLOR, IF OPACITY GOES FROM 0.1 TO 1 EACH TIME YOU HOVER OVER A SQUARE/TOUCH A SQUARE AND SHOW OR HIDE THE GRID SQUARES
 
 let userSelectedColor;
 let opacityToggle = 'opacity off';
 let gridBordersToggle = 'grids on';
 
-// CREATE THE ETCH-A-SKECTH GRID AND ALLOW MOUSE MOVEMENT WHEN HOVERED OVER A SQUARE OR TOUCH INPUT ON EACH SQUARE FROM USER ON MOBILE DEVICE
+// CREATE THE ETCH-A-SKECTH GRID AND ALLOW MOUSE MOVEMENT WHEN HOVERED OVER A SQUARE OR TOUCH INPUT ON EACH SQUARE FROM A USER ON A MOBILE DEVICE
 
 createEtchASketchGrid();
 
@@ -450,6 +450,8 @@ function toggleGridBordersDisplay() {
 }
 
 toggleGridBordersDisplay();
+
+// THIS FUNCTION EXIST TO ALLOW "getCustomOpacity()" TO UPDATE THE OPACITY DISPLAY IF "RAINBOW" IS SELECTED
 
 function rainbowBackgroundDisplay() {
   userSelectedColor = 'rainbow';
