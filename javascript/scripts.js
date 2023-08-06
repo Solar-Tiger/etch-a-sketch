@@ -65,7 +65,7 @@ function createEtchASketchGrid(gridSize) {
   // IF STATEMENT TO DETERMINE DEFAULT SETTINGS ON PAGE LOAD FOR GRID SIZE, CURRENT SELECTED COLOR AND CURRENT DISPLAYED COLOR
 
   if (!gridSize) {
-    newGridSize = 5;
+    newGridSize = 16;
 
     userSelectedColor = 'black';
 
