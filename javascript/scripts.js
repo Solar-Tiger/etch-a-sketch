@@ -228,58 +228,66 @@ function getRandomColorWithOpacity(opacity) {
 function getSelectedColor() {
   const selectedColor = document.querySelectorAll('.colors');
 
+  // THIS ANSWER WAS GIVEN BY CHATGPT USING OBJECT DESTRUCTURING WHICH I DON'T FULLY UNDERSTAND AT THIS POINT (AUGUST 6TH, ,2023)
+
+  // const colorMap = {
+  //   red: { r: 255, g: 0, b: 0 },
+  //   orange: { r: 255, g: 165, b: 0 },
+  //   yellow: { r: 255, g: 255, b: 0 },
+  //   green: { r: 0, g: 128, b: 0 },
+  //   blue: { r: 0, g: 0, b: 255 },
+  //   purple: { r: 128, g: 0, b: 128 },
+  //   black: { r: 0, g: 0, b: 0 },
+  //   white: { r: 255, g: 255, b: 255 },
+  // };
+
+  // selectedColor.forEach((color) => {
+  //   color.addEventListener('click', () => {
+  //     const colorClass = color.classList[0];
+
+  //     if (colorClass === 'rainbow') {
+  //       rainbowBackgroundDisplay();
+  //     } else {
+  //       userSelectedColor = colorClass;
+
+  //       const { r, g, b } = colorMap[colorClass];
+
+  //       customOpacityDisplay.style.background = `rgba(${r}, ${g}, ${b}, ${opacitySlider.value})`;
+
+  //       console.log(colorClass, r, g, b);
+  //     }
+  //   });
+  // });
+
+  // THIS IS THE EXACT SAME ANSWER WITHOUT USING OBJECT DESTRUCTURING, SOMETHING I HAVE SOME KNOWLEDGE ON AT THIS TIME (AUGUST 6TH, 2023)
+
+  // THIS "colorMap" VARIABLE USING OBJECTS LIKE THIS IS NEW TO ME, BUT I WANT TO UNDERSTAND IT SO I LEAVE IT HERE FOR FUTURE REFERENCE
+
+  const colorMap = {
+    red: { r: 255, g: 0, b: 0 },
+    orange: { r: 255, g: 165, b: 0 },
+    yellow: { r: 255, g: 255, b: 0 },
+    green: { r: 0, g: 128, b: 0 },
+    blue: { r: 0, g: 0, b: 255 },
+    purple: { r: 128, g: 0, b: 128 },
+    black: { r: 0, g: 0, b: 0 },
+    white: { r: 255, g: 255, b: 255 },
+  };
+
   selectedColor.forEach((color) => {
     color.addEventListener('click', () => {
-      if (color.classList[0] === 'red') {
-        userSelectedColor = 'red';
+      // I COMMENT THIS CODE OUT BECAUSE I WOULDN'T HAVE DONE THIS: CHATGPT DID IT AND I WILL LEARN FROM EXAMPLE
 
-        customOpacityDisplay.style.background = `rgba(${255}, ${0}, ${0}, ${
-          opacitySlider.value
-        })`;
-      } else if (color.classList[0] === 'orange') {
-        userSelectedColor = 'orange';
+      // const colorClass = color.classList[0];
 
-        customOpacityDisplay.style.background = `rgba(${255}, ${165}, ${0}, ${
-          opacitySlider.value
-        })`;
-      } else if (color.classList[0] === 'yellow') {
-        userSelectedColor = 'yellow';
-
-        customOpacityDisplay.style.background = `rgba(${255}, ${255}, ${0}, ${
-          opacitySlider.value
-        })`;
-      } else if (color.classList[0] === 'green') {
-        userSelectedColor = 'green';
-
-        customOpacityDisplay.style.background = `rgba(${0}, ${128}, ${0}, ${
-          opacitySlider.value
-        })`;
-      } else if (color.classList[0] === 'blue') {
-        userSelectedColor = 'blue';
-
-        customOpacityDisplay.style.background = `rgba(${0}, ${0}, ${255}, ${
-          opacitySlider.value
-        })`;
-      } else if (color.classList[0] === 'purple') {
-        userSelectedColor = 'purple';
-
-        customOpacityDisplay.style.background = `rgba(${128}, ${0}, ${128}, ${
-          opacitySlider.value
-        })`;
-      } else if (color.classList[0] === 'black') {
-        userSelectedColor = 'black';
-
-        customOpacityDisplay.style.background = `rgba(${0}, ${0}, ${0}, ${
-          opacitySlider.value
-        })`;
-      } else if (color.classList[0] === 'white') {
-        userSelectedColor = 'white';
-
-        customOpacityDisplay.style.background = `rgba(${255}, ${255}, ${255}, ${
-          opacitySlider.value
-        })`;
-      } else if (color.classList[0] === 'rainbow') {
+      if (color.classList[0] === 'rainbow') {
         rainbowBackgroundDisplay();
+      } else {
+        userSelectedColor = color.classList[0];
+
+        const colorValues = colorMap[color.classList[0]];
+
+        customOpacityDisplay.style.background = `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, ${opacitySlider.value})`;
       }
 
       // SETS CUSTOM GRID COLOR TO NULL AGAIN (IF IT ISN'T ALREADY NULL) SO "applySelectedColor()" RUNS CORRECTLY
@@ -467,3 +475,73 @@ function rainbowBackgroundDisplay() {
 
   customOpacityDisplay.style.background = rainbowBackground;
 }
+
+// ---------------------------------------------------------------------------
+//               OLD EVENT LISTENER USING IF ELSE CHAINING
+// ---------------------------------------------------------------------------
+
+// LEAVING THIS HERE TO REMIND MYSELF TO DO BETTER AND CONTINUE TO LEARN TO IMPROVE MY CODE
+
+// selectedColor.forEach((color) => {
+//   color.addEventListener('click', () => {
+//     if (color.classList[0] === 'red') {
+//       userSelectedColor = 'red';
+
+//       customOpacityDisplay.style.background = `rgba(${255}, ${0}, ${0}, ${
+//         opacitySlider.value
+//       })`;
+//     } else if (color.classList[0] === 'orange') {
+//       userSelectedColor = 'orange';
+
+//       customOpacityDisplay.style.background = `rgba(${255}, ${165}, ${0}, ${
+//         opacitySlider.value
+//       })`;
+//     } else if (color.classList[0] === 'yellow') {
+//       userSelectedColor = 'yellow';
+
+//       customOpacityDisplay.style.background = `rgba(${255}, ${255}, ${0}, ${
+//         opacitySlider.value
+//       })`;
+//     } else if (color.classList[0] === 'green') {
+//       userSelectedColor = 'green';
+
+//       customOpacityDisplay.style.background = `rgba(${0}, ${128}, ${0}, ${
+//         opacitySlider.value
+//       })`;
+//     } else if (color.classList[0] === 'blue') {
+//       userSelectedColor = 'blue';
+
+//       customOpacityDisplay.style.background = `rgba(${0}, ${0}, ${255}, ${
+//         opacitySlider.value
+//       })`;
+//     } else if (color.classList[0] === 'purple') {
+//       userSelectedColor = 'purple';
+
+//       customOpacityDisplay.style.background = `rgba(${128}, ${0}, ${128}, ${
+//         opacitySlider.value
+//       })`;
+//     } else if (color.classList[0] === 'black') {
+//       userSelectedColor = 'black';
+
+//       customOpacityDisplay.style.background = `rgba(${0}, ${0}, ${0}, ${
+//         opacitySlider.value
+//       })`;
+//     } else if (color.classList[0] === 'white') {
+//       userSelectedColor = 'white';
+
+//       customOpacityDisplay.style.background = `rgba(${255}, ${255}, ${255}, ${
+//         opacitySlider.value
+//       })`;
+//     } else if (color.classList[0] === 'rainbow') {
+//       rainbowBackgroundDisplay();
+//     }
+
+//     SETS CUSTOM GRID COLOR TO NULL AGAIN (IF IT ISN'T ALREADY NULL) SO "applySelectedColor()" RUNS CORRECTLY
+
+//     if (userCustomGridColor !== null) {
+//       userCustomGridColor = null;
+//     }
+
+//     opacityMap.clear();
+//   });
+// });
