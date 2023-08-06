@@ -403,12 +403,16 @@ function getCustomGridColor(newSquareOpacity) {
 // ---------------------------------------------------------------------------
 
 function applySelectedColor(targetSquare, currentOpacity) {
+  let newTargetSquare = targetSquare;
+
   if (userSelectedColor === 'rainbow') {
-    targetSquare.style.background = getRandomColorWithOpacity(currentOpacity);
+    newTargetSquare.style.background =
+      getRandomColorWithOpacity(currentOpacity);
   } else if (userSelectedColor === 'custom grid color') {
-    targetSquare.style.background = getCustomGridColor(currentOpacity);
+    newTargetSquare.style.background = getCustomGridColor(currentOpacity);
   } else {
-    targetSquare.style.background = getSelectedColorAndOpacity(currentOpacity);
+    newTargetSquare.style.background =
+      getSelectedColorAndOpacity(currentOpacity);
   }
 }
 
