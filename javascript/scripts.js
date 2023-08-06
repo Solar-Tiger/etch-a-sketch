@@ -110,7 +110,7 @@ function fillEtchASketchSquareMouse() {
     }
 
     square.addEventListener('mouseenter', (e) => {
-      applySelectedColor(e.target, userSelectedColor, opacity);
+      applySelectedColor(e.target, opacity);
 
       if (opacity < 1) {
         opacity += 0.1;
@@ -150,7 +150,7 @@ function touchStart(e) {
     touchOpacity = opacityMap.get(previousSquare);
   }
 
-  applySelectedColor(e.target, userSelectedColor, touchOpacity);
+  applySelectedColor(e.target, touchOpacity);
 
   if (opacityMap.get(previousSquare) < 1 && opacityToggle === 'opacity on') {
     opacityMap.set(previousSquare, opacityMap.get(previousSquare) + 0.1);
@@ -186,7 +186,7 @@ function touchMove(e) {
     const currentSquare = touchedSquare;
 
     if (currentSquare !== mySquare) {
-      applySelectedColor(currentSquare, userSelectedColor, touchOpacity);
+      applySelectedColor(currentSquare, touchOpacity);
 
       if (
         opacityMap.get(previousSquare) < 1 &&
@@ -305,38 +305,61 @@ function getSelectedColor() {
 //                    GET USER SELECTED COLOR AND OPACITY
 // ---------------------------------------------------------------------------
 
-function getSelectedColorAndOpacity(squareOpacity) {
-  if (userSelectedColor === 'red') {
-    return `rgb(${255}, ${0}, ${0}, ${squareOpacity})`;
-  }
-  if (userSelectedColor === 'orange') {
-    return `rgb(${255}, ${165}, ${0}, ${squareOpacity})`;
-  }
-  if (userSelectedColor === 'yellow') {
-    return `rgb(${255}, ${255}, ${0}, ${squareOpacity})`;
-  }
-  if (userSelectedColor === 'green') {
-    return `rgb(${0}, ${128}, ${0}, ${squareOpacity})`;
-  }
-  if (userSelectedColor === 'blue') {
-    return `rgb(${0}, ${0}, ${255}, ${squareOpacity})`;
-  }
-  if (userSelectedColor === 'purple') {
-    return `rgb(${128}, ${0}, ${128}, ${squareOpacity})`;
-  }
-  if (userSelectedColor === 'black') {
-    return `rgb(${0}, ${0}, ${0}, ${squareOpacity})`;
-  }
-  if (userSelectedColor === 'white') {
-    return `rgb(${255}, ${255}, ${255}, ${squareOpacity})`;
-  }
-  if (userSelectedColor === 'rainbow') {
-    // THIS FUNCTIO EXIST TO UPDATE THE OPACITY FOR RAINBOW IF SELECTED. UNSURE IF IT'S THE CORRECT WAY TO DO IT THIS WAY OR NOT
+// REFACTORED THIS CODE USING THE SAME EXAMPLE FROM "GET USER SELECTED COLOR"
 
-    rainbowBackgroundDisplay();
+function getSelectedColorAndOpacity(squareOpacity) {
+  const colorMapWithOpacity = {
+    red: { r: 255, g: 0, b: 0 },
+    orange: { r: 255, g: 165, b: 0 },
+    yellow: { r: 255, g: 255, b: 0 },
+    green: { r: 0, g: 128, b: 0 },
+    blue: { r: 0, g: 0, b: 255 },
+    purple: { r: 128, g: 0, b: 128 },
+    black: { r: 0, g: 0, b: 0 },
+    white: { r: 255, g: 255, b: 255 },
+  };
+
+  let colorOpacityValues = colorMapWithOpacity[userSelectedColor];
+
+  if (userSelectedColor === 'rainbow') {
+    rainbowBackgroundDisplay(squareOpacity);
 
     return 'rainbow';
   }
+
+  return `rgba(${colorOpacityValues.r}, ${colorOpacityValues.g}, ${colorOpacityValues.b}, ${squareOpacity})`;
+
+  // if (userSelectedColor === 'red') {
+  //   return `rgba(${255}, ${0}, ${0}, ${squareOpacity})`;
+  // }
+  // if (userSelectedColor === 'orange') {
+  //   return `rgba(${255}, ${165}, ${0}, ${squareOpacity})`;
+  // }
+  // if (userSelectedColor === 'yellow') {
+  //   return `rgba(${255}, ${255}, ${0}, ${squareOpacity})`;
+  // }
+  // if (userSelectedColor === 'green') {
+  //   return `rgba(${0}, ${128}, ${0}, ${squareOpacity})`;
+  // }
+  // if (userSelectedColor === 'blue') {
+  //   return `rgba(${0}, ${0}, ${255}, ${squareOpacity})`;
+  // }
+  // if (userSelectedColor === 'purple') {
+  //   return `rgba(${128}, ${0}, ${128}, ${squareOpacity})`;
+  // }
+  // if (userSelectedColor === 'black') {
+  //   return `rgba(${0}, ${0}, ${0}, ${squareOpacity})`;
+  // }
+  // if (userSelectedColor === 'white') {
+  //   return `rgba(${255}, ${255}, ${255}, ${squareOpacity})`;
+  // }
+  // if (userSelectedColor === 'rainbow') {
+  //   // THIS FUNCTIO EXIST TO UPDATE THE OPACITY FOR RAINBOW IF SELECTED. UNSURE IF IT'S THE CORRECT WAY TO DO IT THIS WAY OR NOT
+
+  //   rainbowBackgroundDisplay();
+
+  //   return 'rainbow';
+  // }
 }
 
 // ---------------------------------------------------------------------------
@@ -352,7 +375,9 @@ let userCustomGridColor = null;
 customGridColor.addEventListener('input', () => {
   userCustomGridColor = customGridColor.value;
 
-  customOpacityDisplay.style.background = customGridColor.value;
+  customOpacityDisplay.style.background = getCustomGridColor(
+    opacitySlider.value
+  );
 });
 
 customGridColor.addEventListener('change', () => {
@@ -370,21 +395,17 @@ function getCustomGridColor(newSquareOpacity) {
   const g = parseInt(userCustomGridColor.slice(3, 5), 16);
   const b = parseInt(userCustomGridColor.slice(5, 7), 16);
 
-  return `rgb(${r}, ${g}, ${b}, ${newSquareOpacity})`;
+  return `rgba(${r}, ${g}, ${b}, ${newSquareOpacity})`;
 }
 
 // ---------------------------------------------------------------------------
 //         COMBINE ALL ABOVE RESULTS TO CHANGE THE GRID SQUARES COLORS
 // ---------------------------------------------------------------------------
 
-function applySelectedColor(
-  targetSquare,
-  currentlySelectedColor,
-  currentOpacity
-) {
-  if (currentlySelectedColor === 'rainbow') {
+function applySelectedColor(targetSquare, currentOpacity) {
+  if (userSelectedColor === 'rainbow') {
     targetSquare.style.background = getRandomColorWithOpacity(currentOpacity);
-  } else if (currentlySelectedColor === 'custom grid color') {
+  } else if (userSelectedColor === 'custom grid color') {
     targetSquare.style.background = getCustomGridColor(currentOpacity);
   } else {
     targetSquare.style.background = getSelectedColorAndOpacity(currentOpacity);
