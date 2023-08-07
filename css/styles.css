@@ -13,8 +13,8 @@
   flex-wrap: wrap;
   margin: 0 auto;
   border: 1px solid black;
-  max-width: 360px;
-  max-height: 360px;
+  max-width: 340px;
+  max-height: 340px;
   height: 100vh;
 }
 
