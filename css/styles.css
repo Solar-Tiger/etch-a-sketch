@@ -47,6 +47,7 @@
   /* width: calc(80% / 2); */
   width: calc(50% - 10px); /*ANSWER GIVEN BY CHATGPT*/
   box-sizing: border-box;
+  font-size: 1rem;
 }
 
 .opacity-container {
@@ -68,6 +69,8 @@
 .colors-container {
   display: flex;
   margin: 0 auto;
+  max-width: 300px;
+  max-height: 50px;
   border: 1px solid black;
 }
 
@@ -78,10 +81,19 @@
   border: 1px solid black;
 }
 
+.custom-grid-color {
+  width: 40px;
+  height: 40px;
+}
+
 .custom-opacity-display {
   width: 100px;
   height: 40px;
   border: 2px solid black;
+}
+
+.custom-font {
+  font-size: 1rem;
 }
 
 .red {
@@ -118,26 +130,6 @@
 
 .rainbow {
   background: linear-gradient(45deg, red, orange, yellow, green, blue, purple);
-}
-
-@media (min-width: 340px) {
-  .btn-container > button {
-    font-size: 1rem;
-  }
-
-  .custom-font {
-    font-size: 1rem;
-  }
-
-  .colors-container {
-    max-width: 300px;
-    max-height: 50px;
-  }
-
-  .custom-grid-color {
-    width: 40px;
-    height: 40px;
-  }
 }
 
 @media (min-width: 768px) {
