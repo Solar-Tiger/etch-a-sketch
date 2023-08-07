@@ -9,12 +9,17 @@
 </head>
 
 <body>
-    <div class="btn-container">
-        <button type="button" class="change-grid-size-btn">Change Grid Size</button>
-        <button type="button" class="clear-grid">Clear Grid</button>
-    </div>
+    <h1 class="etch-a-sketch-title">Etch-a-sketch</h1>
 
     <div class="grid-square-container"></div>
+
+    <div class="btn-container">
+        <button type="button" class="change-grid-size-btn">Change Grid Size</button>
+        <button type="button" class="clear-grid-btn">Clear Grid</button>
+        <button class="toggle-borders-btn">Borders on/off</button>
+        <button class="opacity-toggle-btn">Opacity off</button>
+
+    </div>
 
     <div class="colors-container">
         <div class="red colors"></div>
@@ -29,20 +34,19 @@
     </div>
 
     <div class="opacity-container">
-        <button class="opacity-toggle-btn">Opacity off</button>
-
-        <input type="color" class="custom-grid-color">
-
-        <div class="custom-opacity">
-            <input type="range" id="opacity-range" min="0.1" max="1" value="1" step="0.1" class="opacity-slider">
-            <label for="opacity-range">Opacity Slider</label>
+        <div class="custom-color-container">
+            <p class="select-custom-color custom-font">Select a custom color instead:</p>
+            <input type="color" class="custom-grid-color">
         </div>
-
-        <p class="user-selected-opacity">1</p>
 
         <div class="custom-opacity-display"></div>
 
-        <button class="toggle-borders-btn">Borders on/off</button>
+        <div class="custom-opacity">
+            <input type="range" id="opacity-range" min="0.1" max="1" value="1" step="0.1" class="opacity-slider">
+            <label for="opacity-range" class="custom-font">Opacity Slider</label>
+        </div>
+
+        <p class="user-selected-opacity custom-font">1</p>
     </div>
 
     <script src="javascript/scripts.js"></script>

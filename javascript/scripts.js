@@ -8,7 +8,7 @@
 
 const gridContainer = document.querySelector('.grid-square-container');
 const changeGridSizeBtn = document.querySelector('.change-grid-size-btn');
-const clearGridBtn = document.querySelector('.clear-grid');
+const clearGridBtn = document.querySelector('.clear-grid-btn');
 const opacityToggleBtn = document.querySelector('.opacity-toggle-btn');
 const customGridColor = document.querySelector('.custom-grid-color');
 const userSelectedOpacity = document.querySelector('.user-selected-opacity');

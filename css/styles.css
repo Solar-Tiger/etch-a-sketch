@@ -3,31 +3,18 @@
   padding: 0;
 }
 
-.btn-container {
-  display: flex;
-  justify-content: center;
-}
-
-.opacity-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.change-grid-size-btn,
-.clear-grid,
-.opacity-toggle-btn,
-.toggle-borders-btn {
-  margin: 10px 10px;
-  padding: 5px 20px;
+.etch-a-sketch-title {
+  text-align: center;
+  margin: 5px 0;
 }
 
 .grid-square-container {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 auto 30px auto;
+  margin: 0 auto;
   border: 1px solid black;
+  max-width: 360px;
+  max-height: 360px;
   height: 100vh;
 }
 
@@ -40,6 +27,42 @@
 
 .etch-a-sketch-square-no-border {
   border: none;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 10px auto;
+
+  /* THESE TWO OPTIONS I DON'T QUITE UNDERSTAND BUT DO */
+  max-width: 100%;
+  width: 340px;
+}
+
+.btn-container > button {
+  margin: 5px;
+  padding: 10px;
+  /* width: calc(80% / 2); */
+  width: calc(50% - 10px); /*ANSWER GIVEN BY CHATGPT*/
+  box-sizing: border-box;
+}
+
+.opacity-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.custom-color-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 260px;
+  max-width: 100%;
 }
 
 .colors-container {
@@ -98,40 +121,59 @@
 }
 
 @media (min-width: 340px) {
-  .grid-square-container {
-    max-width: 340px; /* Set your desired maximum width for smaller screens */
-    max-height: 340px; /* Set your desired maximum height for smaller screens */
+  .btn-container > button {
+    font-size: 1rem;
   }
 
-  .change-grid-size-btn,
-  .clear-grid,
-  .opacity-toggle-btn,
-  .toggle-borders-btn {
-    font-size: 16px;
+  .custom-font {
+    font-size: 1rem;
   }
 
   .colors-container {
     max-width: 300px;
     max-height: 50px;
   }
+
+  .custom-grid-color {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 @media (min-width: 768px) {
   .grid-square-container {
-    max-width: 650px; /* Set your desired maximum width for smaller screens */
-    max-height: 650px; /* Set your desired maximum height for smaller screens */
+    max-width: 600px; /* Set your desired maximum width for smaller screens */
+    max-height: 600px; /* Set your desired maximum height for smaller screens */
   }
 
-  .change-grid-size-btn,
-  .clear-grid,
-  .opacity-toggle-btn,
-  .toggle-borders-btn {
-    font-size: 30px;
+  .btn-container > button {
+    font-size: 1.3rem;
+  }
+
+  .custom-font {
+    font-size: 1.3rem;
   }
 
   .colors-container {
-    max-width: 540px;
-    max-height: 105px;
+    max-width: 452px;
+    max-height: 88px;
+  }
+
+  .custom-color-container {
+    width: 350px;
+  }
+
+  .custom-grid-color {
+    width: 50px;
+    height: 50px;
+  }
+
+  .btn-container {
+    width: 600px;
+  }
+
+  .etch-a-sketch-title {
+    font-size: 3rem;
   }
 }
 
@@ -141,15 +183,33 @@
     max-height: 800px; /* Set your desired maximum height for larger screens */
   }
 
-  .change-grid-size-btn,
-  .clear-grid,
-  .opacity-toggle-btn,
-  .toggle-borders-btn {
-    font-size: 45px;
+  .btn-container > button {
+    font-size: 1.8rem;
+  }
+
+  .custom-font {
+    font-size: 1.8rem;
   }
 
   .colors-container {
     max-width: 640px;
     max-height: 105px;
+  }
+
+  .custom-color-container {
+    width: 475px;
+  }
+
+  .custom-grid-color {
+    width: 70px;
+    height: 70px;
+  }
+
+  .btn-container {
+    width: 800px;
+  }
+
+  .etch-a-sketch-title {
+    font-size: 4rem;
   }
 }
