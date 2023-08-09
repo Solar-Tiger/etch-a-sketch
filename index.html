@@ -9,44 +9,52 @@
 </head>
 
 <body>
-    <h1 class="etch-a-sketch-title">Etch-a-sketch</h1>
+    <div class="etch-a-sketch-master-container">
+        <div class="etch-a-sketch-grid-container">
+            <h1 class="etch-a-sketch-title">Etch-a-sketch</h1>
 
-    <div class="grid-square-container"></div>
-
-    <div class="btn-container">
-        <button type="button" class="change-grid-size-btn">Change Grid Size</button>
-        <button type="button" class="clear-grid-btn">Clear Grid</button>
-        <button class="toggle-borders-btn">Borders on/off</button>
-        <button class="opacity-toggle-btn">Opacity off</button>
-
-    </div>
-
-    <div class="colors-container">
-        <div class="red colors"></div>
-        <div class="orange colors"></div>
-        <div class="yellow colors"></div>
-        <div class="green colors"></div>
-        <div class="blue colors"></div>
-        <div class="purple colors"></div>
-        <div class="black colors"></div>
-        <div class="white colors"></div>
-        <div class="rainbow colors"></div>
-    </div>
-
-    <div class="opacity-container">
-        <div class="custom-color-container">
-            <p class="select-custom-color custom-font">Select a custom color instead:</p>
-            <input type="color" class="custom-grid-color">
+            <div class="grid-square-container"></div>
         </div>
 
-        <div class="custom-opacity-display"></div>
+        <div class="etch-a-sketch-controls-container">
 
-        <div class="custom-opacity">
-            <input type="range" id="opacity-range" min="0.1" max="1" value="1" step="0.1" class="opacity-slider">
-            <label for="opacity-range" class="custom-font">Opacity Slider</label>
+            <div class="btn-container">
+                <button class="change-grid-size-btn">Change Grid Size</button>
+                <button class="clear-grid-btn">Clear Grid</button>
+                <button class="toggle-borders-btn">Borders on/off</button>
+                <button class="opacity-toggle-btn">Opacity off</button>
+            </div>
+
+            <div class="colors-container">
+                <div class="red"></div>
+                <div class="orange"></div>
+                <div class="yellow"></div>
+                <div class="green"></div>
+                <div class="blue"></div>
+                <div class="purple"></div>
+                <div class="black"></div>
+                <div class="white"></div>
+                <div class="rainbow"></div>
+            </div>
+
+            <div class="custom-color-container">
+                <p class="select-custom-color custom-font">Select a custom color instead:</p>
+                <input type="color" class="custom-grid-color">
+            </div>
+
+            <div class="custom-opacity-display"></div>
+
+            <div class="custom-opacity">
+                <div class="opacity-slider-container">
+                    <input type="range" id="opacity-range" min="0.1" max="1" value="1" step="0.1"
+                        class="opacity-slider">
+                    <label for="opacity-range" class="custom-font">Opacity Slider</label>
+                </div>
+
+                <p class="user-selected-opacity custom-font">1</p>
+            </div>
+
         </div>
-
-        <p class="user-selected-opacity custom-font">1</p>
     </div>
 
     <script src="javascript/scripts.js"></script>

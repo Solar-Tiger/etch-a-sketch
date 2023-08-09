@@ -1,3 +1,13 @@
+/* ROOT AND COLORS WOULD BE USED TO DYNAMICALLY SET THE BACKGROUND COLOR AND MAKE IT MORE MAINTAINABLE BUT I'D NEED A NEW WAY TO ACCESS THE CLASS NAMES */
+
+/* :root {
+  --red: red;
+}
+
+.colors {
+  background-color: var(--bg-color);
+} */
+
 * {
   margin: 0;
   padding: 0;
@@ -29,6 +39,13 @@
   border: none;
 }
 
+.etch-a-sketch-controls-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 .btn-container {
   display: flex;
   justify-content: center;
@@ -45,40 +62,34 @@
   margin: 5px;
   padding: 10px;
   /* width: calc(80% / 2); */
-  width: calc(50% - 10px); /*ANSWER GIVEN BY CHATGPT*/
+  width: calc(
+    50% - 10px
+  ); /*ANSWER GIVEN BY CHATGPT, USED TO KEEP THE MARGIN FROM BREAKING IT*/
   box-sizing: border-box;
   font-size: 1rem;
-}
-
-.opacity-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin: 10px 0;
-}
-
-.custom-color-container {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 260px;
-  max-width: 100%;
 }
 
 .colors-container {
   display: flex;
   margin: 0 auto;
-  max-width: 300px;
+  width: 300px;
   max-height: 50px;
   border: 1px solid black;
 }
 
-.colors {
+.colors-container > div {
   box-sizing: border-box;
   flex: 1 1;
   aspect-ratio: 1/1;
   border: 1px solid black;
+}
+
+.custom-color-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+  gap: 20px;
 }
 
 .custom-grid-color {
@@ -87,9 +98,25 @@
 }
 
 .custom-opacity-display {
-  width: 100px;
+  width: 40px;
   height: 40px;
   border: 2px solid black;
+  border-radius: 50%;
+}
+
+.custom-opacity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  margin: 10px auto;
+}
+
+.opacity-slider-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 .custom-font {
@@ -133,6 +160,10 @@
 }
 
 @media (min-width: 768px) {
+  .etch-a-sketch-title {
+    font-size: 3rem;
+  }
+
   .grid-square-container {
     max-width: 600px; /* Set your desired maximum width for smaller screens */
     max-height: 600px; /* Set your desired maximum height for smaller screens */
@@ -142,17 +173,17 @@
     font-size: 1.3rem;
   }
 
+  .btn-container {
+    width: 600px;
+  }
+
   .custom-font {
     font-size: 1.3rem;
   }
 
   .colors-container {
-    max-width: 452px;
+    width: 452px;
     max-height: 88px;
-  }
-
-  .custom-color-container {
-    width: 350px;
   }
 
   .custom-grid-color {
@@ -160,48 +191,54 @@
     height: 50px;
   }
 
-  .btn-container {
-    width: 600px;
-  }
-
-  .etch-a-sketch-title {
-    font-size: 3rem;
+  .custom-opacity-display {
+    width: 50px;
+    height: 50px;
   }
 }
 
 @media (min-width: 1280px) {
-  .grid-square-container {
-    max-width: 800px; /* Set your desired maximum width for larger screens */
-    max-height: 800px; /* Set your desired maximum height for larger screens */
-  }
-
-  .btn-container > button {
-    font-size: 1.8rem;
-  }
-
-  .custom-font {
-    font-size: 1.8rem;
-  }
-
-  .colors-container {
-    max-width: 640px;
-    max-height: 105px;
-  }
-
-  .custom-color-container {
-    width: 475px;
-  }
-
-  .custom-grid-color {
-    width: 70px;
-    height: 70px;
-  }
-
-  .btn-container {
-    width: 800px;
+  .etch-a-sketch-master-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row-reverse;
+    gap: 100px;
   }
 
   .etch-a-sketch-title {
     font-size: 4rem;
+  }
+
+  .grid-square-container {
+    width: 650px; /* Set your desired maximum width for larger screens */
+    height: 650px; /* Set your desired maximum height for larger screens */
+  }
+
+  .btn-container {
+    width: 400px;
+  }
+
+  .btn-container > button {
+    font-size: 1.2rem;
+  }
+
+  .custom-font {
+    font-size: 1.5rem;
+  }
+
+  .colors-container {
+    width: 453px;
+    max-height: 74px;
+  }
+
+  .custom-grid-color {
+    width: 50px;
+    height: 50px;
+  }
+
+  .custom-opacity-display {
+    width: 80px;
+    height: 80px;
   }
 }
