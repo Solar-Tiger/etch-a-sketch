@@ -226,7 +226,9 @@ function getRandomColorWithOpacity(opacity) {
 // ---------------------------------------------------------------------------
 
 function getSelectedColor() {
-  const selectedColor = document.querySelectorAll('.colors');
+  const selectedColor = document.querySelector('.colors-container');
+
+  const colors = Array.from(selectedColor.children);
 
   // THIS ANSWER WAS GIVEN BY CHATGPT USING OBJECT DESTRUCTURING WHICH I DON'T FULLY UNDERSTAND AT THIS POINT (AUGUST 6TH, ,2023)
 
@@ -274,7 +276,7 @@ function getSelectedColor() {
     white: { r: 255, g: 255, b: 255 },
   };
 
-  selectedColor.forEach((color) => {
+  colors.forEach((color) => {
     color.addEventListener('click', () => {
       // I COMMENT THIS CODE OUT BECAUSE I WOULDN'T HAVE DONE THIS: CHATGPT DID IT AND I WILL LEARN FROM EXAMPLE
 
