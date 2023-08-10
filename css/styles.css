@@ -1,16 +1,7 @@
-/* ROOT AND COLORS WOULD BE USED TO DYNAMICALLY SET THE BACKGROUND COLOR AND MAKE IT MORE MAINTAINABLE BUT I'D NEED A NEW WAY TO ACCESS THE CLASS NAMES */
-
-/* :root {
-  --red: red;
-}
-
-.colors {
-  background-color: var(--bg-color);
-} */
-
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .etch-a-sketch-title {
@@ -23,9 +14,18 @@
   flex-wrap: wrap;
   margin: 0 auto;
   border: 1px solid black;
-  max-width: 340px;
-  max-height: 340px;
+  max-width: 250px;
+  max-height: 250px;
   height: 100vh;
+  background-color: white;
+}
+
+.etch-a-sketch-grid-container {
+  border: 2px solid black;
+  border-radius: 5%;
+  margin: 10px;
+  padding: 0 37px 37px 37px;
+  background-color: darkred;
 }
 
 .etch-a-sketch-square {
