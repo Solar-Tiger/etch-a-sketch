@@ -14,8 +14,8 @@
   flex-wrap: wrap;
   margin: 0 auto;
   border: 1px solid black;
-  max-width: 250px;
-  max-height: 250px;
+  max-width: 230px;
+  max-height: 230px;
   height: 100vh;
   background-color: white;
 }
@@ -37,6 +37,30 @@
 
 .etch-a-sketch-square-no-border {
   border: none;
+}
+
+.knob-container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.white-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+}
+
+.white-circle:nth-child(1) {
+  bottom: -35px;
+  left: -34px;
+}
+
+.white-circle:nth-child(2) {
+  bottom: -35px;
+  right: -34px;
 }
 
 .etch-a-sketch-controls-container {
