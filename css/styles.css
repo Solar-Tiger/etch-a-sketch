@@ -39,11 +39,10 @@
   box-sizing: border-box;
   width: calc(100% / var(--square-size));
   height: calc(100% / var(--square-size));
-  border: 1px solid black;
 }
 
-.etch-a-sketch-square-no-border {
-  border: none;
+.etch-a-sketch-display-border {
+  border: 1px solid black;
 }
 
 .knob-container {
