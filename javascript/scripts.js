@@ -94,24 +94,18 @@ function fillEtchASketchSquareMouse() {
   etchASketchSquare.forEach((square) => {
     let opacity;
 
-    if (opacityToggle === 'opacity off') {
-      opacity = opacitySlider.value;
-    } else if (opacityToggle === 'opacity on') {
+    if (opacityToggle === 'opacity on') {
       opacity = 0.1;
-    }
-
-    const storedColor = userSelectedColor;
-
-    if (storedColor !== userSelectedColor && opacity === 'opacity on') {
-      opacity = 0.1;
-    } else if (storedColor !== userSelectedColor && opacity === 'opacity off') {
-      opacity = 1;
     }
 
     square.addEventListener('mouseenter', (e) => {
+      if (opacityToggle === 'opacity off') {
+        opacity = opacitySlider.value;
+      }
+
       applySelectedColor(e.target, opacity);
 
-      if (opacity < 1) {
+      if (opacity < 1 && opacityToggle === 'opacity on') {
         opacity += 0.1;
       }
     });
