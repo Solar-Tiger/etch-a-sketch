@@ -94,7 +94,9 @@ function fillEtchASketchSquareMouse() {
   etchASketchSquare.forEach((square) => {
     let opacity;
 
-    if (opacityToggle === 'opacity on') {
+    if (opacityToggle === 'opacity off') {
+      opacity = opacitySlider.value;
+    } else if (opacityToggle === 'opacity on') {
       opacity = 0.1;
     }
 
@@ -292,6 +294,8 @@ function getSelectedColor() {
       }
 
       opacityMap.clear();
+      fillEtchASketchSquareMouse();
+      fillEtchASketchSquareTouch();
     });
   });
 }
@@ -436,9 +440,11 @@ function clearGrid() {
     const blankSquare = square;
 
     blankSquare.removeAttribute('style');
-
-    opacityMap.clear();
   });
+
+  opacityMap.clear();
+  fillEtchASketchSquareMouse();
+  fillEtchASketchSquareTouch();
 }
 
 function toggleOpacity() {
